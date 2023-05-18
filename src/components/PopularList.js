@@ -23,7 +23,7 @@ function PopularList() {
     <div className='popular-list-container'>
       <div className='popular-list'>
         <div className='popular-list-title'>
-          POPULAR LIST
+          Popular Lists
           <div className='popular-list-more'>MORE</div>
         </div>
 

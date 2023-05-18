@@ -1,10 +1,17 @@
+*{
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: black;
-    height: 50px;
+    height: 65px;
     padding: 0 20px;
+   
+    
   }
   
   .navbar ul {
@@ -20,7 +27,7 @@
   .navbar ul li {
     margin: 0 10px;
     color: white;
-    font-size: 16px;
+    
   }
   
   .navbar ul li.navbar-left {
@@ -33,6 +40,9 @@
     margin-right: 10px;
     height: 40px;
     width: 70px;
+  }
+  .navbar-left img:hover{
+    transform: scale(1.1);
   }
   
   .navbar a {
@@ -83,7 +93,7 @@
     }
   
     .navbar ul li {
-      font-size: 14px;
+      
       margin: 5px;
     }
   

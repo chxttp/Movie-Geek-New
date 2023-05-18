@@ -33,7 +33,7 @@ function Signup() {
     };
 
     // Fetch request to API endpoint for user registration
-    fetch('http://192.168.10.131:8080/user/add', {
+    fetch('https://moviegeek.azurewebsites.net/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -63,14 +63,18 @@ function Signup() {
 
   if (authenticated) {
     // history.push("/home"); 
+    localStorage.setItem('username', username);
     navigate('/home')
+    
   }
 
   return (
     <div className="login-container">
       <div className="login-box">
         <div>
+        <NavLink to="/home">
           <img src={logo}/>
+          </NavLink>
         </div>
         <h1 className="login-heading">Welcome to MovieGeek</h1>
         <form onSubmit={handleSubmit}>

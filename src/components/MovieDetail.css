@@ -1,4 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
 .detail-container {
+  
   padding-left: 5%;
   padding-right: 5%;
     display: flex;
@@ -42,25 +51,18 @@
   }
   
   .menu {
-    border-bottom: 1px solid white;
+    background-color: #1D1D1D;
+  
+  
+  cursor: pointer;
+  
     margin-top: 150px;
     display: flex;
     justify-content: space-between;
     
   }
   
-  .menu a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin: 0 10px;
-    border-radius: 5px;
-    border: 1px solid white;
-    transition: all 0.3s ease;
-  }
-  
-  .menu a:hover {
-    background-color: white;
+  .menu:hover{
     color: #1D1D1D;
   }
   
@@ -121,7 +123,7 @@
     width: 100px;
     color: white;
   }
-  .cast{
+  .info{
     padding-top: 60px;
   }
   .popular-reviews {

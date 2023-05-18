@@ -35,7 +35,7 @@ function Login() {
       password: password
     };
 
-    fetch('http://192.168.10.131:8080/user/match', {
+    fetch('https://moviegeek.azurewebsites.net/user/match', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -82,7 +82,10 @@ function Login() {
     
       <div className="login-box">
         <div>
+        <NavLink to="/home">
           <img src={logo}/>
+          </NavLink>
+          
         </div>
         <h1 className="login-heading">Welcome to MovieGeek</h1>
         <form onSubmit={handleSubmit}>

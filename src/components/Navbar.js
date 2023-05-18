@@ -129,25 +129,25 @@ function Navbar(props) {
         
         <li className='navbar-left'>
         <NavLink to="/home" className="active hover">
-            MOVIEGEEKS
+            MovieGeeks
           </NavLink>
         </li>
 
         <li className='navbar-right'>
-          GENRES
+          Genres
         </li>
 
         <li className='navbar-right'>
-          FILMS
+          Films
         </li>
 
         <li className='navbar-right'>
-          LISTS
+          Lists
         </li>
 
         <li className='navbar-right'>
         <NavLink to="/geek" className="active hover">
-            GEEKS
+            Geeks
           </NavLink>
         </li>
         <li className='navbar-right'>
@@ -170,7 +170,7 @@ function Navbar(props) {
 
             <li className='navbar-right'>
               <NavLink to="/login" className="active hover" onClick={handleLogout}>
-                LOGOUT
+                LogOut
 
               </NavLink>
             </li>
@@ -180,13 +180,13 @@ function Navbar(props) {
           <>
             <li className='navbar-right'>
               <NavLink to="/login" className="active hover">
-                LOGIN
+                LogIn
               </NavLink>
             </li>
 
             <li className='navbar-right'>
               <NavLink to="/signup" className="active hover">
-                SIGN UP
+                SignUp
               </NavLink>
             </li>
           </>

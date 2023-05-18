@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { FaHeart } from "react-icons/fa";
 import { MdOutlinePlaylistAddCircle } from "react-icons/md";
@@ -7,12 +7,49 @@ import "./MovieDetail.css";
 import { color } from "@mui/system";
 import YouTube from "react-youtube";
 import Footer from "./Footer";
-// import MyVideo from "https://youtu.be/RlOB3UALvrQ"
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+
+
 
 function MovieDetail() {
-  const videoId = "_Z3QKkl1WyM";
+  const videoId = "JXxAnZaZrG0";
   const [rating, setRating] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [username, setUsername] = useState(true);
+ 
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+  
+
+  
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetch(`https://moviegeek.azurewebsites.net/movie/getAll`)
+      .then((response) => response.json())
+      .then((data) => {
+        const movieData = data.find((movie) => movie.id === Number(movieId));
+        setMovie(movieData);
+      })
+      .catch((error) => console.log(error));
+  }, [movieId]);
+  
+
+  useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+  }, []);
+
+  useEffect(() => {
+    if (username !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [username]);
 
   const opts = {
     height: "390",
@@ -29,17 +66,32 @@ function MovieDetail() {
   const handleLikeClick = () => {};
 
   const castClicked = () => {
-    document.getElementById("cast").innerHTML =
-      "Letitia Wright, Lupita Nyong, Danai Gurira, Winston Duke";
+    const cast = movie?.cast
+    document.getElementById("text").innerHTML =
+      cast
   };
 
+  const DirectorClicked = () =>{
+    const director = movie?.director
+    document.getElementById("text").innerHTML = director
+  }
+  const WriterClicked = () =>{
+    const writer = movie?.screenWriter
+    document.getElementById("text").innerHTML = writer
+
+  }
+  const GenresClicked = () =>{
+    const genres = movie?.genre
+    document.getElementById("text").innerHTML = genres
+  }
+  
   return (
     <div className="movie-detail">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} username={username}/>
       <div>
         <div className="detail-container">
           <div className="right-column">
-            <img src="https://lumiere-a.akamaihd.net/v1/images/pp_disney_blackpanther_wakandaforever_1289_d3419b8f.jpeg" />
+            <img src= {movie?.poster} alt="Poster"/>
             <div className="rating">
               <p>Rate this movie: &nbsp;</p>
               <div className="stars">
@@ -64,39 +116,26 @@ function MovieDetail() {
           </div>
           <div className="left-column">
             <h4>
-              Black Panther: Wakanda Forever &nbsp; &nbsp; Directed by Ryan
-              Coogler
+              {movie?.title}
             </h4>
             <br />
             <p>
-              The people of Wakanda fight to protect their home from intervening
-              world powers as they mourn the death of King T'Challa. In Marvel
-              Studios' "Black Panther: Wakanda Forever," Queen Ramonda (Angela
-              Bassett), Shuri (Letitia Wright), M'Baku (Winston Duke), Okoye
-              (Danai Gurira) and the Dora Milaje (including Florence Kasumba)
-              fight to protect their nation from intervening world powers in the
-              wake of King T'Challa's death. As the Wakandans strive to embrace
-              their next chapter, the heroes must band together with the help of
-              War Dog Nakia (Lupita Nyong'o) and Everett Ross (Martin Freeman)
-              and forge a new path for the kingdom of Wakanda.
+              {movie?.descript}
             </p>
 
             <div>
-              <YouTube videoId={videoId} opts={opts} className="youtube" />
+              <YouTube videoId={movie?.trailer} opts={opts} className="youtube" />
             </div>
             <div className="menu">
               <button onClick={castClicked}>Cast</button>
-              <button onClick={() => console.log("Crew clicked")}>Crew</button>
-              <button onClick={() => console.log("Details clicked")}>
-                Details
-              </button>
-              <button onClick={() => console.log("Genres clicked")}>
-                Genres
-              </button>
+              <button onClick={DirectorClicked} >Director</button>
+              <button onClick={WriterClicked}>Screen Writer</button>
+              <button onClick={GenresClicked}>Genres</button>
             </div>
-            <div className="cast">
-              <p id="cast"></p>
+            <div className="info">
+              <p id="text"></p>
             </div>
+      
 
             <div className="popular-reviews">
               <div className="popular">POPULAR REVIEWS</div>
@@ -111,3 +150,4 @@ function MovieDetail() {
 }
 
 export default MovieDetail;
+

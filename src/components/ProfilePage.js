@@ -30,12 +30,13 @@ function ProfilePage() {
           <img
             src="https://wolfcenter.org/wp-content/uploads/2021/04/preview-full-red-fox-portrait-1080x675.jpg"
             alt="Profile"
+            
           />
           <div className="profile-name">
-            <h1>Foxxxxx</h1>
+            <h1>{username}</h1>
             <p>Artist</p>
           </div>
-          <button className="profile-follow-button">Edit Profile</button>
+          <button className="profile-edit-button">Edit Profile</button>
         </div>
         <div className="profile-body">
           <div className="profile-info">
@@ -87,7 +88,11 @@ function ProfilePage() {
           <div className="recent-review-container">
             <h3 className="recent-review-text">RECENT REVIEWS</h3>
             <div className="recent-review-item">
-                <img src="https://i.mydramalist.com/4v6zJ_4f.jpg" alt="" />
+              <div className="image-container">
+              <img src="https://i.mydramalist.com/4v6zJ_4f.jpg" alt="" />
+
+              </div>
+                
                 <div className="recent-review-info">
                     <h4>THE GLORY</h4>
                     <p>The best revenge series ever, Years after surviving horrific abuse in high school, a woman puts an elaborate revenge scheme in motion to make the perpetrators pay for their crimes.</p>
@@ -102,7 +107,11 @@ function ProfilePage() {
             </div>
 
             <div className="recent-review-item">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/Vincenzo_TV_series.jpg/220px-Vincenzo_TV_series.jpg" alt="" />
+              <div className="image-container">
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/Vincenzo_TV_series.jpg/220px-Vincenzo_TV_series.jpg" alt="" />
+
+              </div>
+                
                 <div className="recent-review-info">
                     <h4>VINCENZO</h4>
                     <p>Vincenzo is trusted by his adoptive father, Paolo. When Fabio dies, Vincenzo takes it upon himself to execute his last word and sets fire to the vineyard of a rival mafia head.</p>
