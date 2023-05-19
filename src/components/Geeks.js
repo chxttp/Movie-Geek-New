@@ -17,7 +17,7 @@ function Geeks() {
       </div>
 
       <div className="popular-this-week-container">
-        <div className="popular-list">
+        <div className="popular-this-week-list">
           <div className="popular-this-week-title">
             POPULAR THIS WEEK
             <hr></hr>
