@@ -27,10 +27,7 @@ function FilmPage() {
     navigate(`/MovieDetail/${movie.id}`);
   }
 
-  
-  
   const movieLists = [];
- 
 
   for (let i = 0; i < Movie.length; i += moviesPerList) {
     const currentList = Movie.slice(i, i + moviesPerList);
@@ -40,27 +37,53 @@ function FilmPage() {
         key={movie.id}
         imageUrl={movie.poster}
         onClick={() => MovieClicked(movie)}
-        
       />
     ));
 
     movieLists.push(
-      <div className="film-item" key={i} >
+      <div className="film-item" key={i}>
         {movieCards}
       </div>
     );
   }
 
-
-  
   return (
     <div className="film-container">
       <Navbar />
       <div className="film-item-title">
         <div className="film">Films</div>
-        <div className="genres" >Genres</div>
+        <div className="genres">
+          Genres
+          <select className="option-menu">
+            <option value="">Default</option>
+            <option value="">Action</option>
+            <option value="">Horror</option>
+            <option value="">Drama</option>
+            <option value="">Comedy</option>
+            <option value="">Romance</option>
+            <option value="">Science fiction</option>
+            <option value="">Romance</option>
+          </select>
+        </div>
 
-        <div className="sort">Sort By</div>
+        <div className="sort">
+          Sort By
+          <select className="option-menu">
+            <option value="">Default</option>
+            <optgroup label="Popularity">
+              <option value="">All time</option>
+              <option value="">This Week</option>
+              <option value="">Today</option>
+            </optgroup>
+            
+            <optgroup label="Release Date">
+              <option value="">Newest</option>
+              <option value="">Oldest</option>
+
+            </optgroup>
+
+          </select>
+        </div>
       </div>
       <div className="film-item-container">
         {/* <div className="film-item" onClick={() => MovieClicked(Movie[1])}>
@@ -88,17 +111,8 @@ function FilmPage() {
             return <MovieCard imageUrl={movie?.poster} />;
           })}
         </div> */}
-        
+
         {movieLists}
-       
-
-        
-
-        
-
-
-        
-        
       </div>
     </div>
   );

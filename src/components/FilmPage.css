@@ -37,9 +37,23 @@
     font-size: 25px;
 }
 .genres{
+    margin-left: 135px;
     font-size: 25px;
 }
 .sort{
     font-size: 25px;
 }
+.option-menu{
+    margin-left: 10px;
+    width: 100px;
+    background-color: transparent;
+    font-size: 14px;
+    color: white;
+    outline: none;
+}
+.option-menu option{
+    color: white;
+
+}
+
 
