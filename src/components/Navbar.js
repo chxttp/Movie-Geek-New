@@ -29,9 +29,13 @@ function Navbar(props) {
           </NavLink>
         </li>
 
-        <li className="navbar-right">Genres</li>
+        
 
-        <li className="navbar-right">Films</li>
+        <li className="navbar-right">
+        <NavLink to="/film" className="active hover">
+            Films
+          </NavLink>
+        </li>
 
         <li className="navbar-right">Lists</li>
 

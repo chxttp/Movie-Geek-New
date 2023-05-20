@@ -10,6 +10,8 @@ import MovieDetail from './components/MovieDetail';
 import ProfilePage from './components/ProfilePage';
 import UserData from './Data/UserData';
 import Geeks from './components/Geeks';
+import Film from './components/FilmPage'
+import FilmPage from './components/FilmPage';
 
 function App() {
   
@@ -27,6 +29,7 @@ function App() {
           <Route path="/MovieDetail/:movieId" element = {<MovieDetail/>}/>
           <Route path="/profile" element = {<ProfilePage/>}/> 
           <Route path="/geek" element = {<Geeks/>}/> 
+          <Route path= "/film" element = {<FilmPage/>}/>
          
         </Routes>
       </div>

@@ -8,6 +8,8 @@ import PopularList from './PopularList';
 import { useState, useContext, useEffect } from 'react';
 import Footer from './Footer';
 import UserData from '../Data/UserData';
+import MovieCard from './MovieCard';
+
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
@@ -36,6 +38,8 @@ function Home() {
       <MovieList listType='popular'/>
       <MovieList listType ='oscar'/>
       <PopularList/>
+     
+      
       
       <Footer/>
 

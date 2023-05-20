@@ -1,0 +1,35 @@
+.movie-container {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 3%;
+    margin-right: 0%;
+    align-items: center;
+    
+    
+    
+    
+}
+
+.movie-border {
+  
+    
+    width: 220px; /* Adjust the width of the card */
+    height: 350px;
+   
+  }
+  
+  
+  
+  .movie-border img {
+    border: 2px solid #ffffff; 
+    cursor: pointer;
+    border-radius: 5px;
+
+    width: 45%; /* Set the image width to fill the container */
+    height: 40%; /* Automatically adjust the height to maintain the aspect ratio */
+    object-fit: cover; /* Crop the image to fit the container */
+  }
+  .movie-border img:hover{
+    transform: scale(1.1);
+  }

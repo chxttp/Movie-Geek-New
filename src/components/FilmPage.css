@@ -1,0 +1,45 @@
+.film-item-container {
+
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: brown; */
+    align-items: center;
+}
+
+.film-item {
+    /* background-color: aliceblue; */
+
+    
+    margin-top: 0%;
+    display: flex;
+    margin-bottom: -12%;
+
+    justify-content: start;
+    /* Distribute the MovieCard components evenly */
+
+
+}
+
+.film-item-title{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 3%;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #FFD700;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    
+}
+.film{
+    font-size: 25px;
+}
+.genres{
+    font-size: 25px;
+}
+.sort{
+    font-size: 25px;
+}
+

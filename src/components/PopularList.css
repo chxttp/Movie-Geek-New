@@ -6,11 +6,14 @@
     align-items: center;
     padding-top: 50px;
     margin-bottom: 30px;
+   
     
     
   }
   
   .popular-list {
+    
+    
     margin-bottom: 20px;
   }
   
@@ -21,6 +24,7 @@
   }
   
   .popular-card-container {
+    
 
     margin-top: 3%;
     display: flex;
