@@ -61,9 +61,16 @@ body {
     justify-content: space-between;
     
   }
-  
-  .menu:hover{
-    color: #1D1D1D;
+  .menu button{
+    background-color: transparent;
+    border: 1px solid wheat;
+    color: white;
+    cursor: pointer;
+    width: 150px;
+  }
+  .menu button:hover{
+    color: #FFD700;
+    
   }
   
   .review {
@@ -90,17 +97,20 @@ body {
   
   .review input[type="radio"]:checked + label {
     color: yellow;
+    
   }
   
   
   
   .stars span.active {
     color: yellow;
+    
   }
   .right-column .rating{
     margin-top: 100px;
     display: flex;
     justify-content:center;
+    cursor: pointer;
     
   }
   .like-button{
@@ -114,14 +124,17 @@ body {
   .heart{
     color: red;
     width: 100px;
+    cursor: pointer;
   }
   .watchlist{
     width: 100px;
     color: white;
+    cursor: pointer;
   }
   .eyes{
     width: 100px;
     color: white;
+    cursor: pointer;
   }
   .info{
     padding-top: 60px;
