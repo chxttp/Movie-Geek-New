@@ -1,0 +1,75 @@
+.sub-list-container {
+  display: flex;
+  width: 100%;
+  /* border: 1px solid blue; */
+  height: 160px;
+}
+
+.l-container {
+    flex: 1;
+    /* border: 1px solid yellow; */
+    display: flex;
+    align-items: center;
+    padding-right: 10px; /* Add padding to create space between cards and container edges */
+  }
+  
+
+
+
+.r-container {
+  flex: 1;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+}
+
+.r-container-title h2 {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.r-container-profile {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.r-container-profile p {
+  align-self: flex-start;
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.heart-like-container {
+  display: flex;
+  align-items: center;
+}
+
+.heart-like-container p {
+  margin-left: 5px; /* Adjust the margin value as needed */
+}
+
+.heart-pl {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.comment-word-container {
+  display: flex;
+  align-items: center;
+}
+
+.comment-word-container p {
+  margin-left: 5px;
+}
+
+.comment-pl {
+    margin-left: 10px;
+  }
+  
+
+.r-container-desc p {
+  color: white;
+}

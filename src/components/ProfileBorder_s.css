@@ -1,0 +1,22 @@
+.profile-border-s {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container-s {
+  width: 35px; /* Adjust the desired width of the container */
+  height: 35px; /* Adjust the desired height of the container */
+  border-radius: 50%;
+  border: 1px solid white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-container-s img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,56 @@
+.list-popular-title {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #ffd700;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+}
+
+.p-list {
+  font-size: 25px;
+}
+
+.p-sort {
+  font-size: 25px;
+}
+
+.p-option-menu {
+  margin-left: 10px;
+  width: 120px;
+  background-color: transparent;
+  font-size: 14px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.p-option-menu option {
+  color: white;
+}
+
+.p-list-cotainer {
+  margin-top: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Updated to align items at the top */
+  /* border: 1px solid green; */
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px auto;
+  width: 100%;
+  padding-bottom: 25px;
+}
+
+
+

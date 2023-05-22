@@ -1,0 +1,23 @@
+.rectangle-border-s {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.rectangle-container-s {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  border: 2px solid white;
+  overflow: hidden;
+}
+
+.rectangle-container-s img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
