@@ -12,6 +12,7 @@ import UserData from './Data/UserData';
 import Geeks from './components/Geeks';
 import Film from './components/FilmPage'
 import FilmPage from './components/FilmPage';
+import ListDetail from './components/ListDetail';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile" element = {<ProfilePage/>}/> 
           <Route path="/geek" element = {<Geeks/>}/> 
           <Route path= "/film" element = {<FilmPage/>}/>
+          <Route path= "/ListDetail" element = {<ListDetail/>}/>
          
         </Routes>
       </div>

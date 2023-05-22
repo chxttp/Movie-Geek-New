@@ -26,7 +26,29 @@ function FilmPage() {
   function MovieClicked(movie) {
     navigate(`/MovieDetail/${movie.id}`);
   }
+  
 
+  function handleSelectChange(event) {
+    const selectedValue = event.target.value;
+    console.log(selectedValue);
+
+    fetch("https://moviegeek.azurewebsites.net/movie/getFilter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({genre: selectedValue}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMovies(data);
+      })
+      .catch((error) => {
+        console.error("Error during API request:", error);
+      });
+  }
+
+  
   // const movieLists = [];
 
   // for (let i = 0; i < Movie.length; i += moviesPerList) {
@@ -78,15 +100,16 @@ function FilmPage() {
         <div className="film">Films</div>
         <div className="genres">
           Genres
-          <select className="option-menu">
+          <select className="option-menu" id = "genre" onChange={handleSelectChange}>
             <option value="">Default</option>
-            <option value="">Action</option>
-            <option value="">Horror</option>
-            <option value="">Drama</option>
-            <option value="">Comedy</option>
-            <option value="">Romance</option>
-            <option value="">Science fiction</option>
-            <option value="">Romance</option>
+            <option value="Action">Action</option>
+            <option value="Horror">Horror</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="War">War</option>
+            <option value="History">History</option>
           </select>
         </div>
 

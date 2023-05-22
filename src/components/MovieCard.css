@@ -16,7 +16,7 @@
     
     width: 220px; /* Adjust the width of the card */
     height: 350px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
    
   }
   
@@ -27,8 +27,8 @@
     cursor: pointer;
     border-radius: 5px;
 
-    width: 45%; /* Set the image width to fill the container */
-    height: 40%; /* Automatically adjust the height to maintain the aspect ratio */
+    width: 55%; /* Set the image width to fill the container */
+    height: 50%; /* Automatically adjust the height to maintain the aspect ratio */
     object-fit: cover; /* Crop the image to fit the container */
   }
   .movie-border img:hover{

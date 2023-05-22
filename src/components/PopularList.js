@@ -1,7 +1,9 @@
 import React from "react";
 import "./PopularList.css";
+import { useNavigate, Redirect, Navigate, Link } from 'react-router-dom';
 
 function PopularList() {
+  const navigate = useNavigate();
   const movies1 = [
     {
       id: 1,
@@ -34,6 +36,10 @@ function PopularList() {
         "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/23f9b25876903.5de890e9ce8ee.png",
     },
   ];
+  const listClicked = () => {
+    navigate(`/ListDetail`);
+
+  }
 
   const movies2 = [
     {
@@ -75,7 +81,7 @@ function PopularList() {
         </div>
 
         <div className="flex-container">
-          <div className="popular-card-container">
+          <div className="popular-card-container" onClick={listClicked}>
             {movies1.map((movie) => (
               <div className="popular-card" key={movie.id}>
                 <img src={movie.imageUrl} alt={movie.title} />
@@ -83,7 +89,7 @@ function PopularList() {
             ))}
           </div>
 
-          <div className="popular-card-container2">
+          <div className="popular-card-container2" onClick={listClicked}>
             {movies2.map((movie) => (
               <div className="popular-card" key={movie.id}>
                 <img src={movie.imageUrl} alt={movie.title} />

@@ -60,7 +60,7 @@
   }
   
   .movie-list-title {
-    border-bottom: 3px solid #FFD700;
+    border-bottom: 3px solid #FFD369;
     font-weight: bold;
     
     padding-bottom: 2px;
@@ -78,7 +78,7 @@
   
   }
   .movie-list-button:hover{
-    color: #FFD700;
+    color: #FFD369;
   }
   .title{
     text-align: center;
@@ -90,7 +90,7 @@
   }
   .title:hover{
     /* text-decoration: underline; */
-    color: #FFD700;
+    color: #FFD369;
     cursor: pointer;
 
   }

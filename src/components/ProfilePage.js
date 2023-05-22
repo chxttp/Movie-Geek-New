@@ -6,6 +6,7 @@ import "./ProfilePage.css";
 import Footer from "./Footer";
 import { useState , useContext, useEffect  } from 'react';
 import UserData from '../Data/UserData';
+import EditProfile from "./EditProfile";
 
 
 
@@ -14,12 +15,18 @@ function ProfilePage() {
     const [isLoggedIn] = useState(true);
     
     const [username, setUsername] = useState('');
+    const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
     setUsername(localStorage.getItem('username'));
   }, []);
   // Access the shared username
-  
+  const showEditProfile = () => {
+    setShowEdit(true)
+  }
+  const closeEditProfile = () => {
+    setShowEdit(false);
+  };
 
   
   return (
@@ -36,7 +43,8 @@ function ProfilePage() {
             <h1>{username}</h1>
             <p>Artist</p>
           </div>
-          <button className="profile-edit-button">Edit Profile</button>
+          <button className="profile-edit-button" onClick={showEditProfile}>Edit Profile</button>
+          {showEdit && (<EditProfile onClose = {closeEditProfile}/>)}
         </div>
         <div className="profile-body">
           <div className="profile-info">
