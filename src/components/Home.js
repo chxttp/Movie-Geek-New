@@ -36,7 +36,7 @@ function Home() {
       <Navbar isLoggedIn={isLoggedIn} username={username}/>
       <MovieList listType='new'/>
       <MovieList listType='popular'/>
-      <MovieList listType ='oscar'/>
+      <MovieList listType ='favorite'/>
       <PopularList/>
      
       

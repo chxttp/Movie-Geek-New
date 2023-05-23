@@ -100,7 +100,7 @@ function MovieDetail() {
             <div className="rating">
               <p>Rate this movie: &nbsp;</p>
               <div className="stars">
-                {[1, 2, 3, 4, 5].map((num) => (
+                {[1,2, 3, 4, 5].map((num) => (
                   <span
                     key={num}
                     onClick={() => handleRatingChange(num)}
