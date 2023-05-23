@@ -9,6 +9,7 @@ import YouTube from "react-youtube";
 import Footer from "./Footer";
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import MovieCard from "./MovieCard";
 
 
 
@@ -91,7 +92,7 @@ function MovieDetail() {
       <div>
         <div className="detail-container">
           <div className="right-column">
-            <img src= {movie?.poster} alt="Poster"/>
+            <MovieCard imageUrl={movie?.poster}/>
             <div className="rating">
               <p>Rate this movie: &nbsp;</p>
               <div className="stars">

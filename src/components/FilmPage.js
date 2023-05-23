@@ -120,13 +120,18 @@ function FilmPage() {
             <optgroup label="Popularity">
               <option value="">All time</option>
               <option value="">This Week</option>
-              <option value="">Today</option>
+              <option value="">This Month</option>
+              <option value="">This Year</option>
             </optgroup>
             
             <optgroup label="Release Date">
               <option value="">Newest</option>
               <option value="">Oldest</option>
+            </optgroup>
 
+            <optgroup label="Rating">
+              <option value="">Highest</option>
+              <option value="">Lowest</option>
             </optgroup>
 
           </select>

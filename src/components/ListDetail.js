@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
 import { useNavigate, Redirect, Navigate, Link } from "react-router-dom";
 import { useState , useContext, useEffect  } from 'react';
+import ProfileBorder from "./ProfileBorder_s";
 
 
 function ListDetail() {
@@ -54,12 +55,9 @@ function ListDetail() {
       <Navbar />
       <div className="list-profile-container">
         <div className="list-profile-header">
-          <img
-            src="https://wolfcenter.org/wp-content/uploads/2021/04/preview-full-red-fox-portrait-1080x675.jpg"
-            alt="Profile"
-          />
+          <ProfileBorder src="https://variety.com/wp-content/uploads/2021/09/Drake-publicity3-2021.jpg?w=1000"/>
           <div className="list-profile-name">
-            <h1>List by Henry</h1>
+            <h1>List by Drake</h1>
           </div>
         </div>
         <div className="list-description">
