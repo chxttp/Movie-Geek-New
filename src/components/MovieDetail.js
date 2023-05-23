@@ -31,7 +31,7 @@ function MovieDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`https://moviegeek.azurewebsites.net/movie/getAll`)
+    fetch(`https://moviegeek.azurewebsites.net/movieStatic/getAll`)
       .then((response) => response.json())
       .then((data) => {
         const movieData = data.find((movie) => movie.id === Number(movieId));
@@ -94,6 +94,9 @@ function MovieDetail() {
         <div className="detail-container">
           <div className="right-column">
             <MovieCard imageUrl={movie?.poster}/>
+            <div class = "show-rating">
+                ⭐  &nbsp;RATING 2.0 / 5.0
+            </div>
             <div className="rating">
               <p>Rate this movie: &nbsp;</p>
               <div className="stars">
@@ -113,8 +116,12 @@ function MovieDetail() {
                   <FaHeart onClick={handleLikeClick} className="heart" />
                   <MdOutlinePlaylistAddCircle className="watchlist" />
                 </div>
+
+                
               </div>
             </div>
+
+            
           </div>
           <div className="left-column">
             <h4>

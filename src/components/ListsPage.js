@@ -3,11 +3,26 @@ import Navbar from "./Navbar";
 import PLContainer from "./PLContainer";
 import Footer from "./Footer";
 import "./ListsPage.css";
+import { useState, useContext, useEffect } from 'react';
 
 function ListsPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(true);
+
+  useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+  }, []);
+
+  useEffect(() => {
+    if (username !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [username]);
   return (
     <div className="List">
-      <Navbar></Navbar>
+      <Navbar isLoggedIn={isLoggedIn} username={username}/>
 
       <div className="list-popular-title">
         <div className="p-list">POPULAR LISTS</div>

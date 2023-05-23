@@ -18,7 +18,7 @@ function MovieList(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch("https://moviegeek.azurewebsites.net/movie/getAll" ,{
+    fetch("https://moviegeek.azurewebsites.net/movieStatic/getAll" ,{
       method: 'GET',
       headers: {
       'Content-Type': 'application/json'

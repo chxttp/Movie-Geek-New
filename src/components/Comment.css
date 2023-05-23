@@ -2,6 +2,7 @@
   max-width: 600px;
   margin: 0 auto;
   position: relative;
+  margin-top: 30px;
 }
 
 .comment-input {

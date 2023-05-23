@@ -4,15 +4,31 @@ import ProfileBorder from "./ProfileBorder";
 import RectangleBorder from "./RectangleBorder";
 import Footer from "./Footer";
 import "./Geeks.css";
+import { useState, useContext, useEffect } from 'react';
 
 function Geeks() {
   var profileName = ["Jonny Doe", "Kristen", "Foxxxxx", "Christopher"];
   var filmWacted = ["500", "1200", "5", "5000"];
   var filmReviewed = ["200", "2300", "23", "20300"];
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(true);
+
+  useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+  }, []);
+
+  useEffect(() => {
+    if (username !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [username]);
+
   return (
     <div className="Geek">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} username={username}/>
       <div className="top-container">
         <h1>GEEKS</h1>
         <p>Make friends, find popular movie geeks in this community!</p>

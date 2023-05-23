@@ -5,13 +5,30 @@ import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 
 function FilmPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Movie, setMovies] = useState([]);
+  const [sortingCriteria, setSortingCriteria] = useState("");
+  const [selectGenre, setGenre] = useState("")
   const navigate = useNavigate();
 
   const moviesPerList = 6; //no.of movie to show in each list
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
-    fetch("https://moviegeek.azurewebsites.net/movie/getAll", {
+    setUsername(localStorage.getItem('username'));
+  }, []);
+
+  useEffect(() => {
+    if (username !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [username]);
+
+
+  useEffect(() => {
+    fetch("https://moviegeek.azurewebsites.net/movieStatic/getAll", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -30,22 +47,56 @@ function FilmPage() {
 
   function handleSelectChange(event) {
     const selectedValue = event.target.value;
-    console.log(selectedValue);
+    setGenre(selectedValue);
+    console.log("sort :",sortingCriteria)
+    console.log("genre :" , selectedValue)
 
-    fetch("https://moviegeek.azurewebsites.net/movie/getFilter", {
+    fetch("https://moviegeek.azurewebsites.net/movieStatic/filterAndSort", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({genre: selectedValue}),
+      body: JSON.stringify({genre: selectedValue, sort: sortingCriteria}),
     })
       .then((response) => response.json())
       .then((data) => {
-        setMovies(data);
+        if (Array.isArray(data)) {
+          setMovies(data);
+        } else {
+          setMovies([]);
+        }
       })
       .catch((error) => {
         console.error("Error during API request:", error);
       });
+  }
+
+  function handleSortByChange(event) {
+    const selectedValue = event.target.value;
+   
+  
+    setSortingCriteria(selectedValue);
+    console.log("sort :", sortingCriteria)
+    console.log("genre :", selectGenre)
+
+    fetch("https://moviegeek.azurewebsites.net/movieStatic/filterAndSort", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ genre: selectGenre, sort: selectedValue }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        setMovies(data);
+      } else {
+        setMovies([]);
+      }
+    })
+    .catch((error) => {
+      console.error("Error during API request:", error);
+    });
   }
 
   
@@ -95,7 +146,7 @@ function FilmPage() {
 
   return (
     <div className="film-container">
-      <Navbar />
+       <Navbar isLoggedIn={isLoggedIn} username={username}/>
       <div className="film-item-title">
         <div className="film">Films</div>
         <div className="genres">
@@ -115,23 +166,20 @@ function FilmPage() {
 
         <div className="sort">
           Sort By
-          <select className="option-menu">
+          <select className="option-menu" id = "sort-by" onChange={handleSortByChange}>
             <option value="">Default</option>
             <optgroup label="Popularity">
-              <option value="">All time</option>
-              <option value="">This Week</option>
-              <option value="">This Month</option>
-              <option value="">This Year</option>
+              <option value="popular">Popularity</option>
             </optgroup>
             
             <optgroup label="Release Date">
-              <option value="">Newest</option>
-              <option value="">Oldest</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
             </optgroup>
 
             <optgroup label="Rating">
-              <option value="">Highest</option>
-              <option value="">Lowest</option>
+              <option value="highest">Highest</option>
+              <option value="lowest">Lowest</option>
             </optgroup>
 
           </select>

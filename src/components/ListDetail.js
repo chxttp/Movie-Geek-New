@@ -6,15 +6,31 @@ import MovieCard from "./MovieCard";
 import { useNavigate, Redirect, Navigate, Link } from "react-router-dom";
 import { useState , useContext, useEffect  } from 'react';
 import ProfileBorder from "./ProfileBorder_s";
+import Comment from "./Comment";
 
 
 function ListDetail() {
     const [Movie, setMovies] = useState([]);
   const navigate = useNavigate();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(true);
+
+  useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+  }, []);
+
+  useEffect(() => {
+    if (username !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [username]);
+
   const moviesPerList = 6; //no.of movie to show in each list
     useEffect(() => {
-        fetch("https://moviegeek.azurewebsites.net/movie/getAll", {
+        fetch("https://moviegeek.azurewebsites.net/movieStatic/getAll", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +68,7 @@ function ListDetail() {
       }
   return (
     <div className="list-container">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} username={username}/>
       <div className="list-profile-container">
         <div className="list-profile-header">
           <ProfileBorder src="https://variety.com/wp-content/uploads/2021/09/Drake-publicity3-2021.jpg?w=1000"/>
@@ -69,6 +85,15 @@ function ListDetail() {
 
       <div className="list-movie-container">
         {movieLists}
+
+      </div>
+
+      <div className="list-comment">
+        COMMENT
+      </div>
+      <div className="comment">
+      <Comment/>
+
 
       </div>
     </div>
