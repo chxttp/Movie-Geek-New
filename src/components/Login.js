@@ -98,7 +98,7 @@ function Login() {
             <div className="password-text">Password:</div>
             <input className="login-input" id = "password" type="password"  />
           </label>
-          <NavLink to="/Signup">
+          <NavLink to="/Signup" style={{color: 'white', textDecoration: 'none'}}>
             Don't have an account?
           </NavLink>
           <br />

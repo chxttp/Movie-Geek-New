@@ -41,6 +41,7 @@
 .r-container-profile p {
   align-self: flex-start;
   margin-left: 10px; /* Adjust the margin as needed */
+  font-weight: normal;
 }
 
 .heart-like-container {
@@ -72,4 +73,5 @@
 
 .r-container-desc p {
   color: white;
+  font-weight: normal;
 }

@@ -99,8 +99,8 @@ function Signup() {
           </label>
           <br />
           <button className="login-button" type="submit">Create an account</button>
-          <NavLink to="/login">
-            Already have an account?
+          <NavLink to="/login" style={{color: 'white', textDecoration: 'none'}}>
+            Already have an account? 
           </NavLink>
         </form>
       </div>

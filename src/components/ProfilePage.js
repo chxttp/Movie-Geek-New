@@ -41,7 +41,6 @@ function ProfilePage() {
           />
           <div className="profile-name">
             <h1>{username}</h1>
-            <p>Artist</p>
           </div>
           <button className="profile-edit-button" onClick={showEditProfile}>Edit Profile</button>
           {showEdit && (<EditProfile onClose = {closeEditProfile}/>)}

@@ -9,6 +9,7 @@ import YouTube from "react-youtube";
 import Footer from "./Footer";
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Comment from "./Comment";
 import MovieCard from "./MovieCard";
 
 
@@ -140,7 +141,7 @@ function MovieDetail() {
 
             <div className="popular-reviews">
               <div className="popular">POPULAR REVIEWS</div>
-              <div className="more">MORE</div>
+              <div className="p-comment"><Comment></Comment></div>
             </div>
           </div>
         </div>
