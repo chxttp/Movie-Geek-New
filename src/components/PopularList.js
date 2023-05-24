@@ -74,12 +74,13 @@ function PopularList() {
 
   return (
     <div className="popular-list-container">
-      <div className="popular-list">
-        <div className="popular-list-title">
+      <div className="popular-list-title">
           Popular Lists
           <div className="popular-list-more">MORE</div>
         </div>
 
+      <div className="popular-list">
+        
         <div className="flex-container">
           <div className="popular-card-container" onClick={listClicked}>
             {movies1.map((movie) => (

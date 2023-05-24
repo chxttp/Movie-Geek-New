@@ -120,8 +120,7 @@ function MovieList(props) {
   return (
 //     
 <div className='movie-list-container'>
-      <div className='movie-list'>
-        <div className='movie-list-title' style={{ height: '28px' }}>
+<div className='movie-list-title' style={{ height: '28px' }}>
           {props.listType === 'new' && 'New Release'}
           {props.listType === 'popular' && 'Popular'}
           {props.listType === 'favorite' && "Audience's Favorite"}
@@ -129,6 +128,15 @@ function MovieList(props) {
             {buttonText}
           </div>
         </div>
+      <div className='movie-list'>
+        {/* <div className='movie-list-title' style={{ height: '28px' }}>
+          {props.listType === 'new' && 'New Release'}
+          {props.listType === 'popular' && 'Popular'}
+          {props.listType === 'favorite' && "Audience's Favorite"}
+          <div className='movie-list-button' onClick={toggleExpanded}>
+            {buttonText}
+          </div>
+        </div> */}
         <div className='movie-card-container'>
           {moviesToDisplay.slice(0, maxMovies * moviesPerList).map((movie) => (
             <div className='movie-card' key={movie.id}>

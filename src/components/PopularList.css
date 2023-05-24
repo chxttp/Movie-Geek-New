@@ -97,10 +97,11 @@
   
   
   .popular-list-title {
-    position: relative;
+   
     border-bottom: 3px solid #FFD369;
     margin-left: 4%;
     margin-right: 4%;
+    width: 86.5%;
    
     padding-bottom: 2px;
     color: white;
