@@ -34,7 +34,7 @@ function App() {
           <Route path="/lists" element = {<ListsPage/>}/>
           <Route path="/geek" element = {<Geeks/>}/> 
           <Route path= "/film" element = {<FilmPage/>}/>
-          <Route path= "/ListDetail" element = {<ListDetail/>}/>
+          <Route path= "/ListDetail/:listId" element = {<ListDetail/>}/>
           <Route path = "/CreateList" element = {<CreateList/>}/>
          
         </Routes>

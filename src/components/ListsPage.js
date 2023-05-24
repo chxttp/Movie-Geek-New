@@ -10,29 +10,43 @@ function ListsPage() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
+  const [poster, setPoster] = useState([])
 
   const [popularlists, setpopularlists] = useState([
-    {
-      title: "Weirdo Movies for Beginners",
-      listimg1:
-        "https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/44/cuckoos-nest-poland.jpg?resize=480:*",
-      listimg2:
-        "https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/44/cuckoos-nest-poland.jpg?resize=480:*",
-      listimg3:
-        "https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/44/cuckoos-nest-poland.jpg?resize=480:*",
-      listimg4:
-        "https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/44/cuckoos-nest-poland.jpg?resize=480:*",
-      listimg5:
-        "https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/44/cuckoos-nest-poland.jpg?resize=480:*",
-      profileimg:
-        "https://img.freepik.com/free-vector/cute-happy-penguin-cartoon-icon-illustration-animal-nature-icon-concept-isolated-flat-cartoon-style_138676-2095.jpg",
-      profilename: "Olive",
-      filminlist: "151",
-      likeamount: "8080",
-      commentamount: "2",
-      listdesc: "Bla Bla Bla Bla Bla Bla",
-    },
+    // {
+    //   title: "Weirdo Movies for Beginners",
+    //   listimg:
+    //     "https://m.media-amazon.com/images/M/MV5BNTliYjlkNDQtMjFlNS00NjgzLWFmMWEtYmM2Mzc2Zjg3ZjEyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg",
+    //   profileimg:
+    //     "https://img.freepik.com/free-vector/cute-happy-penguin-cartoon-icon-illustration-animal-nature-icon-concept-isolated-flat-cartoon-style_138676-2095.jpg",
+    //   profilename: "Olive",
+    //   filminlist: "151",
+    //   likeamount: "8080",
+    //   commentamount: "2",
+    //   listdesc: "Bla Bla Bla Bla Bla Bla",
+    // },
   ]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sort: "" }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setpopularlists(data)
+        const posters = data.map((item) => item.listMoviePoster.split(",").map((url) => url.trim()));
+        setPoster(posters);
+  
+        
+      })
+
+      .catch((error) => console.log(error));
+  }, []);
 
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
@@ -49,6 +63,9 @@ function ListsPage() {
   function createListClicked() {
     navigate(`/CreateList`);
   }
+  const listClicked = (movieId) => {
+    navigate(`/ListDetail/${movieId}`);
+  };
   return (
     <div className="List">
       <Navbar isLoggedIn={isLoggedIn} username={username} />
@@ -70,26 +87,29 @@ function ListsPage() {
           </select>
         </div>
       </div>
-      <div className="p-list-cotainer">
-        {popularlists.map((popularlists) => {
+      <div className="p-list-cotainer" >
+        {popularlists.map((popularlists, index) => {
+          const posters = poster[index]?.slice(0,5); // Get the movie posters array for the current list
+           // Limit the number of posters to 5
           return (
             <PLContainer
-              title={popularlists.title}
-              listimg1={popularlists.listimg1}
-              listimg2={popularlists.listimg2}
-              listimg3={popularlists.listimg3}
-              listimg4={popularlists.listimg4}
-              listimg5={popularlists.listimg5}
-              profileimg={popularlists.profileimg}
-              filminlist={popularlists.filminlist}
-              likeamount={popularlists.likeamount}
-              commentamount={popularlists.commentamount}
-              listdesc={popularlists.listdesc}
+              title={popularlists.listName}
+              
+              // listimg={poster[index].map((poster, i) => (
+              //   <img key={i} src={poster} alt={`Movie Poster ${i + 1}`} />
+              // ))}
+              listimg={posters}
+              profileimg={popularlists?.profileimg}
+              filminlist={popularlists.numOfMovies}
+              likeamount={popularlists.likeAmount}
+              commentamount={popularlists.numOfComments}
+              listdesc={popularlists.listDescript}
+              onClick={() => listClicked(popularlists.id)}
             />
           );
         })}
         <hr className="separator" />
-        <PLContainer></PLContainer>
+        {/* <PLContainer></PLContainer>
         <hr className="separator" />
         <PLContainer></PLContainer>
         <hr className="separator" />
@@ -98,9 +118,10 @@ function ListsPage() {
         <PLContainer></PLContainer>
         <hr className="separator" />
         <PLContainer></PLContainer>
-        <hr className="separator" />
+        <hr className="separator" /> */}
 
         {/* <PLContainer></PLContainer> */}
+        
       </div>
 
       {/* <Footer></Footer> */}

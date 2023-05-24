@@ -7,9 +7,12 @@ function PopularList() {
   const navigate = useNavigate();
   const [movies1, setMovies1] = useState([]);
   const [movies2, setMovies2] = useState([]);
+  const [listID1 , setListID1] = useState([]);
+  const [listID2 , setListID2] = useState([]);
+ 
 
-  const listClicked = () => {
-    navigate(`/ListDetail`);
+  const listClicked = (movieId) => {
+    navigate(`/ListDetail/${movieId}`);
   };
 
   useEffect(() => {
@@ -25,12 +28,14 @@ function PopularList() {
       .then((data) => {
         if (data.length >= 1) {
           const firstMovie = data[0];
+          setListID1(firstMovie.id);
           const moviePosters1 = firstMovie.listMoviePoster.split(", ");
           setMovies1(moviePosters1);
         }
         if (data.length >= 2) {
           // Get the posters for movies in list no.2
           const secondMovie = data[1];
+          setListID2(secondMovie.id);
           const moviePosters2 = secondMovie.listMoviePoster.split(", ");
           setMovies2(moviePosters2);
         }
@@ -48,18 +53,21 @@ function PopularList() {
 
       <div className="popular-list">
         <div className="flex-container">
-          <div className="popular-card-container" onClick={listClicked}>
+          <div className="popular-card-container">
             {movies1.map((poster, index) => (
               <div className="popular-card" key={index}>
-                <img src={poster} alt={`Movie Poster ${index + 1}`} />
+                <img src={poster} alt={`Movie Poster ${index + 1}`} 
+                onClick={() => listClicked(listID1)}/>
               </div>
             ))}
           </div>
 
-          <div className="popular-card-container2" onClick={listClicked}>
+          <div className="popular-card-container2">
             {movies2.map((poster, index) => (
               <div className="popular-card" key={index}>
-                <img src={poster} alt={`Movie Poster ${index + 1}`} />
+                <img src={poster} alt={`Movie Poster ${index + 1}`} 
+                onClick={() => listClicked(listID2)}/>
+                
               </div>
             ))}
           </div>

@@ -7,14 +7,19 @@ import { useNavigate, Redirect, Navigate, Link } from "react-router-dom";
 import { useState , useContext, useEffect  } from 'react';
 import ProfileBorder from "./ProfileBorder_s";
 import Comment from "./Comment";
+import { useParams } from 'react-router-dom';
 
 
 function ListDetail() {
     const [Movie, setMovies] = useState([]);
+    const [listDetail, setDetail] = useState([])
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
+
+  const { listId } = useParams();
+  const intId = parseInt(listId)
 
   useEffect(() => {
     setUsername(localStorage.getItem('username'));
@@ -27,17 +32,33 @@ function ListDetail() {
       setIsLoggedIn(false);
     }
   }, [username]);
+ 
 
   const moviesPerList = 6; //no.of movie to show in each list
     useEffect(() => {
-        fetch("https://moviegeek.azurewebsites.net/movieStatic/getAll", {
-          method: "GET",
+        fetch("https://moviegeek.azurewebsites.net/listStatic/getMovieFromList", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify(intId),
         })
           .then((response) => response.json())
           .then((data) => setMovies(data))
+    
+          .catch((error) => console.log(error));
+      }, []);
+
+      useEffect(() => {
+        fetch("https://moviegeek.azurewebsites.net/listStatic/getDetailOfList", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(intId),
+        })
+          .then((response) => response.json())
+          .then((data) => setDetail(data))
     
           .catch((error) => console.log(error));
       }, []);
@@ -73,11 +94,16 @@ function ListDetail() {
         <div className="list-profile-header">
           <ProfileBorder src="https://variety.com/wp-content/uploads/2021/09/Drake-publicity3-2021.jpg?w=1000"/>
           <div className="list-profile-name">
-            <h1>List by Drake</h1>
+            <h1>List by {listDetail.listOwner}</h1>
           </div>
+          <div className="list-listname">
+            <h1>{listDetail.listName}</h1>
+
+          </div>
+          
         </div>
         <div className="list-description">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages</p>
+        <p>{listDetail.listDescript}</p>
 
         </div>
         

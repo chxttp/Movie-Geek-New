@@ -6,29 +6,28 @@ import { FaComments } from "react-icons/fa";
 import "./PLContainer.css";
 
 function PLContainer({
+  id,
   title,
-  listimg1,
-  listimg2,
-  listimg3,
-  listimg4,
-  listimg5,
+  listimg,
   profileimg,
   profilename,
   filminlist,
   likeamount,
   commentamount,
   listdesc,
+  onClick
 }) {
   const handleLikeClick = () => {};
+  const handleListClick = () => {
+    onClick(id);
+  };
 
   return (
-    <div className="sub-list-container">
+    <div className="sub-list-container" onClick={handleListClick}>
       <div className="l-container">
-        <Rect_b src={listimg1}></Rect_b>
-        <Rect_b src={listimg2}></Rect_b>
-        <Rect_b src={listimg3}></Rect_b>
-        <Rect_b src={listimg4}></Rect_b>
-        <Rect_b src={listimg5}></Rect_b>
+      {listimg.map((poster, index) => (
+          <Rect_b key={index} src={poster} />
+        ))}
       </div>
       <div className="r-container">
         <div className="r-container-title">
