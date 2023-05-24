@@ -78,24 +78,6 @@ function MovieList(props) {
   }
   
 
-  // const oscarAwards = [
-  //   { id: 1, title: 'The Whale', description: 'Description of Movie E', poster: 'https://m.media-amazon.com/images/M/MV5BZDQ4Njg4YTctNGZkYi00NWU1LWI4OTYtNmNjOWMyMjI1NWYzXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg' },
-  //   { id: 2, title: 'Everything Everywhere', description: 'Description of Movie F', poster: 'https://i.ebayimg.com/images/g/X~MAAOSwIfJiR4-N/s-l1600.jpg' },
-  //   { id: 3, title: 'All Quiet In Western Front', description: 'Description of Movie G', poster: 'https://m.media-amazon.com/images/M/MV5BMzM4ZDJhYjYtZGY5Ny00NTk0LWI4ZTYtNjczZDFiMGI2ZjEzXkEyXkFqcGdeQXVyNjc5NjEzNA@@._V1_FMjpg_UX1000_.jpg' },
-  //   { id: 4, title: 'Top Gun', description: 'Description of Movie H', poster: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg' },
-  //   { id: 5, title: 'An Irish Goodbye', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg' },
-  //   {id: 6, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg'},
-  //   { id: 7, title: 'THE WHALE', description: 'Description of Movie E', poster: 'https://m.media-amazon.com/images/M/MV5BZDQ4Njg4YTctNGZkYi00NWU1LWI4OTYtNmNjOWMyMjI1NWYzXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg' },
-  //   { id: 8, title: 'EVERYTHING EVERYWHERE', description: 'Description of Movie F', poster: 'https://i.ebayimg.com/images/g/X~MAAOSwIfJiR4-N/s-l1600.jpg' },
-  //   { id: 9, title: 'ALL QUIET ON WESTERN FRONT', description: 'Description of Movie G', poster: 'https://m.media-amazon.com/images/M/MV5BMzM4ZDJhYjYtZGY5Ny00NTk0LWI4ZTYtNjczZDFiMGI2ZjEzXkEyXkFqcGdeQXVyNjc5NjEzNA@@._V1_FMjpg_UX1000_.jpg' },
-  //   { id: 10, title: 'TOP GUN', description: 'Description of Movie H', poster: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg' },
-  //   { id: 11, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg' },
-  //   {id: 12, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg'},
-  //   { id: 13, title: 'TOP GUN', description: 'Description of Movie H', poster: 'https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg' },
-  //   { id: 14, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg' },
-  //   {id: 15, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg'},
-  //   {id: 16, title: 'AN IRISH GOODBYE', description: 'Description of Movie I', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/An_Irish_Goodbye_poster.jpg/220px-An_Irish_Goodbye_poster.jpg'}
-  // ];
 
   let moviesToDisplay = [];
 
