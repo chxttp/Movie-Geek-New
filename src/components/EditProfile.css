@@ -12,13 +12,12 @@
 
 .edit-profile-widget {
   color: white;
-  background-color: white;
+  background-color: rgb(37, 38, 43);
   padding: 20px;
   width: 600px;
   height: 400px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #444444;
 }
 
 .edit-profile-header h1 {
@@ -100,6 +99,7 @@ textarea {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: white;
 }
 
 input[type="file"] {

@@ -67,7 +67,6 @@
     border: 1px solid white;
     width: 65%;
     height: 90%;
-    
     border-radius: 5px;
   }
   .photo-grid img:hover{
@@ -114,6 +113,23 @@
     
 }
 
+.profile-info .following {
+  cursor: default;
+}
+
+.profile-info .following:hover {
+  cursor: pointer;
+}
+
+.profile-info .followers {
+  cursor: default;
+}
+
+.profile-info .followers:hover {
+  cursor: pointer;
+}
+
+
 .films{
     padding-left: 2%;
     padding-right: 2%;
@@ -132,6 +148,7 @@
     padding-right: 2%;
     border-right: 2px solid white;
     max-height: 65px;
+    
 }
 .followers{
     padding-left: 2%;

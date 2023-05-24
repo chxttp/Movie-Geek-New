@@ -1,0 +1,83 @@
+.following-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.following-popup-widget {
+  color: white;
+  background-color: rgb(37, 38, 43);
+  padding: 20px;
+  width: 400px;
+  height: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.following-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.following-header h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.close-button {
+  background-color: transparent;
+  border: none;
+  color: #777777;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.following-list {
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.following-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.following-item > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.following-item:last-child {
+  border-bottom: none;
+}
+
+.following-item span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.follow-button {
+  background-color: transparent;
+  border: 1px solid #777777;
+  color: #777777;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+}
+
+.follow-button.following {
+  background-color: #777777;
+  color: white;
+}

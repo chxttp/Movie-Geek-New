@@ -107,7 +107,7 @@ function Geeks() {
 
       
       <div className="footer-geek">
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     </div>
   );
