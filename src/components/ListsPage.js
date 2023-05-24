@@ -41,10 +41,8 @@ function ListsPage() {
           Sort By
           <select className="p-option-menu">
             <option value="">POPULARITY</option>
-            <option value="">ALL TIME</option>
-            <option value="">THIS WEEK</option>
-            <option value="">THIS MONTH</option>
-            <option value="">THIS YEAR</option>
+            <option value="">Your list</option>
+            
           </select>
         </div>
       </div>
