@@ -1,3 +1,22 @@
+.create-list{
+  margin-top: 4%;
+  display: flexbox;
+  text-align: center;
+  color: white;  
+}
+
+.create-list h4{
+  font-size: 30px;
+}
+
+.create-list-button{
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+}
+
+
 .list-popular-title {
   margin-left: 5%;
   margin-right: 5%;

@@ -14,6 +14,7 @@ import Geeks from './components/Geeks';
 import Film from './components/FilmPage'
 import FilmPage from './components/FilmPage';
 import ListDetail from './components/ListDetail';
+import CreateList from './components/CreateList';
 
 function App() {
   
@@ -34,6 +35,7 @@ function App() {
           <Route path="/geek" element = {<Geeks/>}/> 
           <Route path= "/film" element = {<FilmPage/>}/>
           <Route path= "/ListDetail" element = {<ListDetail/>}/>
+          <Route path = "/CreateList" element = {<CreateList/>}/>
          
         </Routes>
       </div>
