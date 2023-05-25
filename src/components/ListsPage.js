@@ -10,7 +10,7 @@ function ListsPage() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
-  const [poster, setPoster] = useState([])
+  const [poster, setPoster] = useState([]);
 
   const [popularlists, setpopularlists] = useState([
     // {
@@ -38,11 +38,11 @@ function ListsPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setpopularlists(data)
-        const posters = data.map((item) => item.listMoviePoster.split(",").map((url) => url.trim()));
+        setpopularlists(data);
+        const posters = data.map((item) =>
+          item.listMoviePoster.split(",").map((url) => url.trim())
+        );
         setPoster(posters);
-  
-        
       })
 
       .catch((error) => console.log(error));
@@ -83,32 +83,31 @@ function ListsPage() {
           <select className="p-option-menu">
             <option value="">POPULARITY</option>
             <option value="">Your list</option>
-            
           </select>
         </div>
       </div>
-      <div className="p-list-cotainer" >
-        {popularlists.map((popularlists, index) => {
-          const posters = poster[index]?.slice(0,5); // Get the movie posters array for the current list
-           // Limit the number of posters to 5
+      <div className="p-list-cotainer">
+        {popularlists.map((popularlist, index) => {
+          const posters = poster[index]?.slice(0, 5);
+          const isLastItem = index === popularlists.length - 1;
+
           return (
-            <PLContainer
-              title={popularlists.listName}
-              
-              // listimg={poster[index].map((poster, i) => (
-              //   <img key={i} src={poster} alt={`Movie Poster ${i + 1}`} />
-              // ))}
-              listimg={posters}
-              profileimg={popularlists?.profileimg}
-              filminlist={popularlists.numOfMovies}
-              likeamount={popularlists.likeAmount}
-              commentamount={popularlists.numOfComments}
-              listdesc={popularlists.listDescript}
-              onClick={() => listClicked(popularlists.id)}
-            />
+            <React.Fragment key={popularlist.id}>
+              <PLContainer
+                title={popularlist.listName}
+                listimg={posters}
+                profileimg={popularlist?.profileimg}
+                filminlist={popularlist.numOfMovies}
+                likeamount={popularlist.likeAmount}
+                commentamount={popularlist.numOfComments}
+                listdesc={popularlist.listDescript}
+                onClick={() => listClicked(popularlist.id)}
+              />
+              {!isLastItem && <hr className="separator" />}
+            </React.Fragment>
           );
         })}
-        <hr className="separator" />
+        {/* <hr className="separator" /> */}
         {/* <PLContainer></PLContainer>
         <hr className="separator" />
         <PLContainer></PLContainer>
@@ -121,7 +120,6 @@ function ListsPage() {
         <hr className="separator" /> */}
 
         {/* <PLContainer></PLContainer> */}
-        
       </div>
 
       {/* <Footer></Footer> */}
