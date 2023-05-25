@@ -11,6 +11,7 @@ function ListsPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
   const [poster, setPoster] = useState([]);
+  const [sortingCriteria, setSortingCriteria] = useState("");
 
   const [popularlists, setpopularlists] = useState([
     // {
@@ -34,7 +35,7 @@ function ListsPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ sort: "" }),
+      body: JSON.stringify({ sort: "favorite" }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -66,6 +67,58 @@ function ListsPage() {
   const listClicked = (movieId) => {
     navigate(`/ListDetail/${movieId}`);
   };
+
+  function handleSortBy(event) {
+    const selectedValue = event.target.value;
+
+    setSortingCriteria(selectedValue);
+
+    if (selectedValue === username) {
+      fetch("https://moviegeek.azurewebsites.net/listStatic/getMyList", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sort: username }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setpopularlists(data);
+          const posters = data.map((item) =>
+              item.listMoviePoster.split(",").map((url) => url.trim())
+            );
+            setPoster(posters);
+        })
+        .catch((error) => {
+          console.error("Error during API request:", error);
+        });
+    }
+
+    else if(selectedValue == "popular"){
+      
+        window.scrollTo(0, 0);
+        fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ sort: "favorite" }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setpopularlists(data);
+            const posters = data.map((item) =>
+              item.listMoviePoster.split(",").map((url) => url.trim())
+            );
+            setPoster(posters);
+          })
+    
+          .catch((error) => console.log(error));
+      
+
+    }
+  }
+
   return (
     <div className="List">
       <Navbar isLoggedIn={isLoggedIn} username={username} />
@@ -77,12 +130,16 @@ function ListsPage() {
       </div>
 
       <div className="list-popular-title">
-        <div className="p-list">POPULAR LISTS</div>
+        <div className="p-list">Popular Lists</div>
         <div className="p-sort">
           Sort By
-          <select className="p-option-menu">
-            <option value="">POPULARITY</option>
-            <option value="">Your list</option>
+          <select
+            className="p-option-menu"
+            onChange={handleSortBy}
+            id="sort-by"
+          >
+            <option value="popular">Popularity</option>
+            <option value={username}>Your list</option>
           </select>
         </div>
       </div>
@@ -121,8 +178,9 @@ function ListsPage() {
 
         {/* <PLContainer></PLContainer> */}
       </div>
-
-      {/* <Footer></Footer> */}
+      {/* <div className="list-footer">
+        <Footer></Footer>
+      </div> */}
     </div>
   );
 }

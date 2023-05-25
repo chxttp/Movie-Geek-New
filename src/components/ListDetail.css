@@ -1,3 +1,7 @@
+*{
+  
+}
+
 .list-profile {
     display: flex;
    
@@ -13,15 +17,27 @@
     border: 3px solid #fff;
 }
 .list-profile-container {
+  
     padding-left: 3%;
     padding-right: 3%;
     margin: 0 auto;
     color: #fff;
-    font-family: 'Helvetica Neue', sans-serif;
+    
     
   }
   .list-listname{
+    margin-top: 3%;
    
+    display: flex;
+    justify-content: center;
+    
+    
+    color: white;
+   
+  }
+  .list-listname h1{
+    font-size: 32px;
+
   }
 
   .list-profile-header {
@@ -42,10 +58,11 @@
   .list-profile-name {
     padding-left: 2%;
     flex: 1;
+    
   }
   
   .list-profile-name h1 {
-    font-size: 14px;
+    font-size: 20px;
     margin-bottom: 10px;
     color: white;
   }
@@ -84,6 +101,7 @@
 }
 .list-description p{
   font-weight: normal;
+  font-size: 16px;
 }
 .list-comment{
   

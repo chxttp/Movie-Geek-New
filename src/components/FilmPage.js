@@ -3,6 +3,7 @@ import "./FilmPage.css";
 import { useNavigate, Redirect, Navigate, Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 function FilmPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -194,6 +195,11 @@ function FilmPage() {
         
         
       </div>
+      {/* <div className="film-footer">
+        <Footer/>
+
+      </div> */}
+      
     </div>
   );
 }

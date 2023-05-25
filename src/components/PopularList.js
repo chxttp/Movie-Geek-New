@@ -15,6 +15,10 @@ function PopularList() {
     navigate(`/ListDetail/${movieId}`);
   };
 
+  const moreClicked= () =>{
+    navigate('/lists')
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {
@@ -48,7 +52,7 @@ function PopularList() {
     <div className="popular-list-container">
       <div className="popular-list-title">
         Most Liked List
-        <div className="popular-list-more">MORE</div>
+        <div className="popular-list-more" onClick={moreClicked}>MORE</div>
       </div>
 
       <div className="popular-list">

@@ -19,7 +19,7 @@ function ListDetail() {
   const [username, setUsername] = useState(true);
 
   const { listId } = useParams();
-  const intId = parseInt(listId)
+  // const intId = parseInt(listId)
 
   useEffect(() => {
     setUsername(localStorage.getItem('username'));
@@ -41,7 +41,7 @@ function ListDetail() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(intId),
+          body: JSON.stringify(listId),
         })
           .then((response) => response.json())
           .then((data) => setMovies(data))
@@ -55,7 +55,7 @@ function ListDetail() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(intId),
+          body: JSON.stringify(listId),
         })
           .then((response) => response.json())
           .then((data) => setDetail(data))
@@ -90,16 +90,16 @@ function ListDetail() {
   return (
     <div className="list-container">
       <Navbar isLoggedIn={isLoggedIn} username={username}/>
+      <div className="list-listname">
+            <h1>{listDetail.listName}</h1>
+      </div>
       <div className="list-profile-container">
         <div className="list-profile-header">
           <ProfileBorder src="https://variety.com/wp-content/uploads/2021/09/Drake-publicity3-2021.jpg?w=1000"/>
           <div className="list-profile-name">
             <h1>List by {listDetail.listOwner}</h1>
           </div>
-          <div className="list-listname">
-            <h1>{listDetail.listName}</h1>
-
-          </div>
+          
           
         </div>
         <div className="list-description">
