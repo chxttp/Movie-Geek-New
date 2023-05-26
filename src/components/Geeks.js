@@ -1,20 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Navbar from './Navbar';
-import ProfileBorder from './ProfileBorder';
-import RectangleBorder from './RectangleBorder';
-import Footer from './Footer';
-import './Geeks.css';
+import React, { useState, useContext, useEffect } from "react";
+import Navbar from "./Navbar";
+import ProfileBorder from "./ProfileBorder";
+import RectangleBorder from "./RectangleBorder";
+import Footer from "./Footer";
+import "./Geeks.css";
 
 function Geeks() {
   const profileData = [
     {
-      profileName: 'Jonny Doe',
-      filmWacted: '500',
-      filmReviewed: '200',
+      profileName: "Jonny Doe",
+      filmWacted: "500",
+      filmReviewed: "200",
       profileimg:
-        'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
+        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
       listimg:
-        'https://m.media-amazon.com/images/I/717la8Z17sL._AC_UF894,1000_QL80_.jpg',
+        "https://m.media-amazon.com/images/I/717la8Z17sL._AC_UF894,1000_QL80_.jpg",
     },
     // Add more profile objects as needed
   ];
@@ -24,7 +24,7 @@ function Geeks() {
   const [userdata, setUserdata] = useState([]);
 
   useEffect(() => {
-    setUsername(localStorage.getItem('username'));
+    setUsername(localStorage.getItem("username"));
   }, []);
 
   useEffect(() => {
@@ -34,8 +34,6 @@ function Geeks() {
       setIsLoggedIn(false);
     }
   }, [username]);
-
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,14 +48,11 @@ function Geeks() {
         
         const limitedData = data.slice(0,3);
 
-        setUserdata(limitedData)
-
+        setUserdata(limitedData);
       })
 
       .catch((error) => console.log(error));
   }, []);
-
-
 
   return (
     <div className="Geek">
@@ -94,9 +89,7 @@ function Geeks() {
         </div>
       </div>
 
-      <div className="footer-geek">
-        {/* <Footer></Footer> */}
-      </div>
+      <div className="footer-geek">{/* <Footer></Footer> */}</div>
     </div>
   );
 }

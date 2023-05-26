@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Rect_b from "./Rect_b";
 import ProfileBorder_s from "./ProfileBorder_s";
 import { FaHeart } from "react-icons/fa";
@@ -17,10 +17,14 @@ function PLContainer({
   listdesc,
   onClick
 }) {
+  const [liked, setLiked] = useState(false);
+
   const handleLikeClick = (event) => {
-  event.stopPropagation();
-  // Perform the like action or any other logic you need
-};
+    event.stopPropagation();
+    setLiked((prevLiked) => !prevLiked);
+    // Perform any other logic related to the like action
+  };
+
   const handleListClick = () => {
     onClick(id);
   };
@@ -28,7 +32,7 @@ function PLContainer({
   return (
     <div className="sub-list-container" onClick={handleListClick}>
       <div className="l-container">
-      {listimg.map((poster, index) => (
+        {listimg.map((poster, index) => (
           <Rect_b key={index} src={poster} />
         ))}
       </div>
@@ -41,8 +45,11 @@ function PLContainer({
           <p>{profilename}</p>
           <p>{filminlist} films</p>
           <div className="heart-like-container">
-            <FaHeart onClick={handleLikeClick} className="heart-pl" />
-            <p>{likeamount}</p>
+            <FaHeart
+              onClick={handleLikeClick}
+              className={`heart-pl ${liked ? "liked" : ""}`}
+            />
+            <p>{liked ? likeamount + 1 : likeamount}</p>
           </div>
           <div className="comment-word-container">
             <FaComments onClick={handleLikeClick} className="comment-pl" />
@@ -56,7 +63,5 @@ function PLContainer({
     </div>
   );
 }
-
-
 
 export default PLContainer;

@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 import PLContainer from "./PLContainer";
 import Footer from "./Footer";
 import "./ListsPage.css";
-import { useState, useContext, useEffect } from "react";
-import { useNavigate, Redirect, Navigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ListsPage() {
   const navigate = useNavigate();
@@ -12,23 +12,7 @@ function ListsPage() {
   const [username, setUsername] = useState(true);
   const [poster, setPoster] = useState([]);
   const [sortingCriteria, setSortingCriteria] = useState("");
-
-  const [popularlists, setpopularlists] = useState([
-    // {
-    //   title: "Weirdo Movies for Beginners",
-    //   listimg:
-    //     "https://m.media-amazon.com/images/M/MV5BNTliYjlkNDQtMjFlNS00NjgzLWFmMWEtYmM2Mzc2Zjg3ZjEyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg",
-    //   profileimg:
-    //     "https://img.freepik.com/free-vector/cute-happy-penguin-cartoon-icon-illustration-animal-nature-icon-concept-isolated-flat-cartoon-style_138676-2095.jpg",
-    //   profilename: "Olive",
-    //   filminlist: "151",
-    //   likeamount: "8080",
-    //   commentamount: "2",
-    //   listdesc: "Bla Bla Bla Bla Bla Bla",
-    // },
-  ]);
-
-  
+  const [popularlists, setPopularLists] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,13 +25,12 @@ function ListsPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setpopularlists(data);
+        setPopularLists(data);
         const posters = data.map((item) =>
           item.listMoviePoster.split(",").map((url) => url.trim())
         );
         setPoster(posters);
       })
-
       .catch((error) => console.log(error));
   }, []);
 
@@ -56,23 +39,19 @@ function ListsPage() {
   }, []);
 
   useEffect(() => {
-    if (username !== null) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
+    setIsLoggedIn(username !== null);
   }, [username]);
 
   function createListClicked() {
     navigate(`/CreateList`);
   }
+
   const listClicked = (movieId) => {
     navigate(`/ListDetail/${movieId}`);
   };
 
-  function handleSortBy(event) {
+  const handleSortBy = (event) => {
     const selectedValue = event.target.value;
-
     setSortingCriteria(selectedValue);
 
     if (selectedValue === username) {
@@ -85,41 +64,48 @@ function ListsPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setpopularlists(data);
+          setPopularLists(data);
           const posters = data.map((item) =>
-              item.listMoviePoster.split(",").map((url) => url.trim())
-            );
-            setPoster(posters);
+            item.listMoviePoster.split(",").map((url) => url.trim())
+          );
+          setPoster(posters);
         })
         .catch((error) => {
           console.error("Error during API request:", error);
         });
-    }
-
-    else if(selectedValue == "popular"){
-      
-        window.scrollTo(0, 0);
-        fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ sort: "favorite" }),
+    } else if (selectedValue === "popular") {
+      window.scrollTo(0, 0);
+      fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sort: "favorite" }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setPopularLists(data);
+          const posters = data.map((item) =>
+            item.listMoviePoster.split(",").map((url) => url.trim())
+          );
+          setPoster(posters);
         })
-          .then((response) => response.json())
-          .then((data) => {
-            setpopularlists(data);
-            const posters = data.map((item) =>
-              item.listMoviePoster.split(",").map((url) => url.trim())
-            );
-            setPoster(posters);
-          })
-    
-          .catch((error) => console.log(error));
-      
-
+        .catch((error) => console.log(error));
     }
-  }
+  };
+
+  const handleLike = (listId) => {
+    const updatedLists = popularlists.map((list) => {
+      if (list.id === listId) {
+        const updatedList = { ...list };
+        updatedList.likeAmount += updatedList.liked ? -1 : 1;
+        updatedList.liked = !updatedList.liked;
+        return updatedList;
+      }
+      return list;
+    });
+    setPopularLists(updatedLists);
+  };
 
   return (
     <div className="List">
@@ -161,25 +147,14 @@ function ListsPage() {
                 likeamount={popularlist.likeAmount}
                 commentamount={popularlist.numOfComments}
                 listdesc={popularlist.listDescript}
+                liked={popularlist.liked}
+                onLike={() => handleLike(popularlist.id)}
                 onClick={() => listClicked(popularlist.id)}
               />
               {!isLastItem && <hr className="separator" />}
             </React.Fragment>
           );
         })}
-        {/* <hr className="separator" /> */}
-        {/* <PLContainer></PLContainer>
-        <hr className="separator" />
-        <PLContainer></PLContainer>
-        <hr className="separator" />
-        <PLContainer></PLContainer>
-        <hr className="separator" />
-        <PLContainer></PLContainer>
-        <hr className="separator" />
-        <PLContainer></PLContainer>
-        <hr className="separator" /> */}
-
-        {/* <PLContainer></PLContainer> */}
       </div>
       {/* <div className="list-footer">
         <Footer></Footer>
