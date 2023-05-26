@@ -13,9 +13,38 @@ function ProfilePage() {
   const [showEdit, setShowEdit] = useState(false);
   const [showFollowersPopup, setShowFollowersPopup] = useState(false);
   const [showFollowingPopup, setShowFollowingPopup] = useState(false);
+  const [UserData, setUserData] = useState([]);
+  const [recentActivity, setRecentActivity] = useState([]);
+
+  useEffect(() => {
+    // Manually create an array with three images
+    const images = [
+      "https://f.ptcdn.info/501/079/000/ro7a57tj7kZ21R4R7heZ-o.jpg",
+      "https://i.mydramalist.com/4v6zJ_4f.jpg",
+      "https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/Vincenzo_TV_series.jpg/220px-Vincenzo_TV_series.jpg",
+    ];
+
+    setRecentActivity(images);
+  }, []);
 
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
+  }, []);
+
+  useEffect(() => {
+    fetch("https://moviegeek.azurewebsites.net/userDynamic/getMyDetail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sort: username }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+      })
+
+      .catch((error) => console.log(error));
   }, []);
 
   const showEditProfile = () => {
@@ -49,6 +78,7 @@ function ProfilePage() {
         <div className="profile-header">
           <img
             src="https://wolfcenter.org/wp-content/uploads/2021/04/preview-full-red-fox-portrait-1080x675.jpg"
+            // src= {UserData.proImage}
             alt="Profile"
           />
           <div className="profile-name">
@@ -62,33 +92,34 @@ function ProfilePage() {
         <div className="profile-body">
           <div className="profile-info">
             <div className="films">
-              <p>5</p>
+              <p>{UserData?.numofFilm}</p>
               <h3>FILMS</h3>
             </div>
 
             <div className="lists">
-              <p>1</p>
+              <p>{UserData?.numofList}</p>
               <h3>LISTS</h3>
             </div>
 
             <div className="following" onClick={handleFollowingClick}>
-              <p>10</p>
+              <p>{UserData?.numofFollowing}</p>
               <h3>FOLLOWING</h3>
             </div>
 
             <div className="followers" onClick={handleFollowersClick}>
-              <p>250</p>
+              <p>{UserData?.numofFollower}</p>
               <h3>FOLLOWERS</h3>
             </div>
           </div>
           <div className="profile-description">
             <h2 className="bio-title">BIO</h2>
             <p>
-              I'm a fox who enjoys watching movies during my vacations! <br />
-              You can see what I like and enjoy here!
+              {/* I'm a fox who enjoys watching movies during my vacations! <br />
+              You can see what I like and enjoy here! */}
+              {UserData?.bio}
             </p>
           </div>
-          <div className="recent-activities">
+          {/* <div className="recent-activities">
             <h2>RECENT ACTIVITY</h2>
             <div className="photo-grid">
               <img
@@ -100,6 +131,14 @@ function ProfilePage() {
                 src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/Vincenzo_TV_series.jpg/220px-Vincenzo_TV_series.jpg"
                 alt="Photo 3"
               />
+            </div>
+          </div> */}
+          <div className="recent-activities">
+            <h2>RECENT ACTIVITY</h2>
+            <div className="photo-grid">
+              {recentActivity.map((photo, index) => (
+                <img src={photo} alt={`Photo ${index + 1}`} key={index} />
+              ))}
             </div>
           </div>
 
