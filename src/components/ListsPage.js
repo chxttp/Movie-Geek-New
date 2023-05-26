@@ -154,6 +154,7 @@ function ListsPage() {
                 title={popularlist.listName}
                 listimg={posters}
                 profileimg={popularlist?.profileimg}
+                profilename={popularlist.listOwner}
                 filminlist={popularlist.numOfMovies}
                 likeamount={popularlist.likeAmount}
                 commentamount={popularlist.numOfComments}

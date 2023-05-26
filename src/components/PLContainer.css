@@ -74,4 +74,9 @@
 .r-container-desc p {
   color: white;
   font-weight: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Specify the number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
