@@ -47,7 +47,7 @@ function Geeks() {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data)
+        
         const limitedData = data.slice(0,3);
 
         setUserdata(limitedData)
