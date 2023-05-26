@@ -148,7 +148,7 @@ function MovieDetail() {
 
             <div className="popular-reviews">
               <div className="popular">POPULAR REVIEWS</div>
-              <div className="p-comment"><Comment></Comment></div>
+              <div className="p-comment"><Comment username={username}></Comment></div>
             </div>
           </div>
         </div>

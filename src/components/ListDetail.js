@@ -118,7 +118,7 @@ function ListDetail() {
         COMMENT
       </div>
       <div className="comment">
-      <Comment/>
+      <Comment username={username}/>
 
 
       </div>

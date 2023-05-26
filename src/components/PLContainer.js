@@ -17,7 +17,10 @@ function PLContainer({
   listdesc,
   onClick
 }) {
-  const handleLikeClick = () => {};
+  const handleLikeClick = (event) => {
+  event.stopPropagation();
+  // Perform the like action or any other logic you need
+};
   const handleListClick = () => {
     onClick(id);
   };

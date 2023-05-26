@@ -28,6 +28,8 @@ function ListsPage() {
     // },
   ]);
 
+  
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch("https://moviegeek.azurewebsites.net/listStatic/getSort", {

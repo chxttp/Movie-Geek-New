@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProfileBorder_s from "./ProfileBorder_s";
 import "./FollowingPopup.css";
 
-function FollowingPopup({ onClose }) {
+function FollowingPopup({ onClose, isOwnProfile}) {
   const [following, setFollowing] = useState([
     { id: 1, username: "user1", isFollowing: true },
     { id: 2, username: "user2", isFollowing: true },
@@ -32,12 +32,17 @@ function FollowingPopup({ onClose }) {
             <div className="following-item" key={follow.id}>
               <ProfileBorder_s />
               <span>{follow.username}</span>
-              <button
-                className={`follow-button ${follow.isFollowing ? "following" : ""}`}
-                onClick={() => toggleFollowStatus(follow.id)}
-              >
-                {follow.isFollowing ? "Following" : "Follow"}
-              </button>
+              
+
+              {isOwnProfile && (
+                  <button
+                  className={`follow-button ${follow.isFollowing ? "following" : ""}`}
+                  onClick={() => toggleFollowStatus(follow.id)}
+  
+                >
+                  {follow.isFollowing ? "Following" : "Follow"}
+                </button>
+                )}
             </div>
           ))}
         </div>

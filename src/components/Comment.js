@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Comment.css';
 
-const Comment = () => {
+const Comment = ({username}) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
@@ -26,7 +26,7 @@ const Comment = () => {
             <div className="comment-item" key={index}>
               <div className="comment-header">
                 <div className="comment-avatar" />
-                <div className="comment-username">User Name</div>
+                <div className="comment-username">{username}</div>
               </div>
               <div className="comment-text">{comment}</div>
             </div>
