@@ -25,6 +25,7 @@ function MovieDetail() {
   const [watchStatus, setWatchStatus] = useState("0");
 
   const { movieId } = useParams();
+  const movieIdAsInt = parseInt(movieId);
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -36,7 +37,8 @@ function MovieDetail() {
         setMovie(movieData);
       })
       .catch((error) => console.log(error));
-  }, [movieId]);
+      fetchActivityData();
+  }, []);
 
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
@@ -45,6 +47,7 @@ function MovieDetail() {
   useEffect(() => {
     if (username !== null) {
       setIsLoggedIn(true);
+      
     } else {
       setIsLoggedIn(false);
     }
@@ -57,10 +60,46 @@ function MovieDetail() {
       autoplay: 2,
     },
   };
+  const fetchActivityData = () => {
+    // Fetch activity data from the API
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/getAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt }),
+    })
+      .then((data) => {
+       
+        setLikeStatus(data.likeStatus);
+        setWatchStatus(data.watchStatus);
+        setRating(parseInt(data.Rating));
+        alert(data.likeStatus)
+        if (data.likeStatus === "1") {
+          setLiked(true);
+          setHeartColor("red");
+        }
+        if (data.watchStatus === "1") {
+          setEyeColor("yellow");
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
-    // alert(newRating)
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "rate", likeStatus: "0", watchStatus: "0", rating: rating }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => console.log(error));
+    
   };
 
   const handleLikeClick = () => {
@@ -75,6 +114,36 @@ function MovieDetail() {
       setLikeStatus("1");
       
     }
+
+    if(likeStatus === "1"){
+      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "like", likeStatus: likeStatus, watchStatus: "0", rating: 0 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => console.log(error));
+      
+      
+    }
+    else if(likeStatus === "0"){
+      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "like", likeStatus: likeStatus, watchStatus: "0", rating: 0 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => console.log(error));
+
+    }
   };
 
   const handleWatchClick = () => {
@@ -87,7 +156,37 @@ function MovieDetail() {
       setWatchStatus("0");
      
     }
-    alert(watchStatus)
+
+    if(watchStatus === "1"){
+      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "watch", likeStatus: "0", watchStatus: watchStatus, rating: 0 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => console.log(error));
+      
+      
+    }
+    else if(watchStatus === "0"){
+      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "watch", likeStatus: "0", watchStatus: watchStatus, rating: 0 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => console.log(error));
+
+    }
+    
   };
 
   const castClicked = () => {

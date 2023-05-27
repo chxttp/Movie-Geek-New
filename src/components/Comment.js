@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Comment.css';
 
 const Comment = ({username}) => {
+  /// pass movie id and list id from the detail page #####
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
