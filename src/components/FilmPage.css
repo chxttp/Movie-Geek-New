@@ -1,27 +1,26 @@
 .film-item-container {
-    height: 1%;
-
-    margin-top: 1%;
-    display: flex;
-    flex-direction: column;
-    /* background-color: brown; */
-    align-items: center;
+  height: 1%;
+  width: 80%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: brown; */
+  align-items: center;
+  margin: 0 auto; /* Center the container horizontally */
 }
 
+
+
 .film-item {
-    /* background-color: aliceblue; */
+  /* background-color: aliceblue; */
+  display: flex;
+  flex-wrap: wrap; /* Add this line to enable wrapping */
+  justify-content: center;
+  /* Distribute the MovieCard components evenly */
+}
 
-    margin-bottom: -12%;
-    margin-top: 1%;
-    display: flex;
-    
-   
-  
-
-    justify-content: start;
-    /* Distribute the MovieCard components evenly */
-
-
+.film-item > div {
+  margin-bottom: -5%; /* Adjust the margin value to reduce the space between rows */
 }
 
 /* .film-item:nth-child(n+3){
@@ -29,42 +28,40 @@
     
 } */
 
-.film-item-title{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 3%;
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid #FFD369;
-    justify-content: space-between;
-    color: white;
-    font-weight: bold;
-    
+.film-item-title {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #ffd369;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
 }
-.film{
-    font-size: 25px;
+.film {
+  font-size: 25px;
 }
-.genres{
-    margin-left: 135px;
-    font-size: 25px;
+.genres {
+  margin-left: 135px;
+  font-size: 25px;
 }
-.sort{
-    font-size: 25px;
+.sort {
+  font-size: 25px;
 }
-.option-menu{
-    margin-left: 10px;
-    width: 100px;
-    background-color: transparent;
-    font-size: 14px;
-    color: white;
-    outline: none;
-    cursor: pointer;
+.option-menu {
+  margin-left: 10px;
+  width: 100px;
+  background-color: transparent;
+  font-size: 14px;
+  color: white;
+  outline: none;
+  cursor: pointer;
 }
-.option-menu option{
-    color: white;
-
+.option-menu option {
+  color: white;
 }
 
-.film-footer{
-    margin-top: 2%;
+.film-footer {
+  margin-top: 2%;
 }

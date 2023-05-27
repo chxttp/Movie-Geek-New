@@ -118,7 +118,7 @@ function ListsPage() {
       </div>
 
       <div className="list-popular-title">
-        <div className="p-list">Popular Lists</div>
+        <div className="p-list">Lists</div>
         <div className="p-sort">
           Sort By
           <select

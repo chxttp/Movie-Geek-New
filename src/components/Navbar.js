@@ -46,9 +46,9 @@ function Navbar(props) {
             Geeks
           </NavLink>
         </li>
-        <li className="navbar-right">
+        {/* <li className="navbar-right">
           <input placeholder="search" />
-        </li>
+        </li> */}
 
         {isLoggedIn ? (
           // authenticated

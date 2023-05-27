@@ -15,7 +15,7 @@ function PLContainer({
   likeamount,
   commentamount,
   listdesc,
-  onClick
+  onClick,
 }) {
   const [liked, setLiked] = useState(false);
 

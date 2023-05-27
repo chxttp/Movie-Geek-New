@@ -80,3 +80,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.heart-pl {
+  color: white;
+}
+
+.heart-pl.liked {
+  color: red;
+}

@@ -75,3 +75,25 @@
   margin-top: 2%;
 }
 
+@media (max-width: 768px) {
+  .p-list-cotainer {
+    width: 100%;
+  }
+  
+  .p-list {
+    font-size: 20px;
+  }
+  
+  .p-sort {
+    font-size: 20px;
+  }
+  
+  .p-option-menu {
+    width: 100px;
+  }
+  
+  .separator {
+    margin: 5px auto;
+  }
+}
+

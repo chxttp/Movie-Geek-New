@@ -9,14 +9,14 @@ function FilmPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Movie, setMovies] = useState([]);
   const [sortingCriteria, setSortingCriteria] = useState("");
-  const [selectGenre, setGenre] = useState("")
+  const [selectGenre, setGenre] = useState("");
   const navigate = useNavigate();
 
   const moviesPerList = 6; //no.of movie to show in each list
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    setUsername(localStorage.getItem('username'));
+    setUsername(localStorage.getItem("username"));
   }, []);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ function FilmPage() {
       setIsLoggedIn(false);
     }
   }, [username]);
-
 
   useEffect(() => {
     fetch("https://moviegeek.azurewebsites.net/movieStatic/getAll", {
@@ -44,20 +43,19 @@ function FilmPage() {
   function MovieClicked(movie) {
     navigate(`/MovieDetail/${movie.id}`);
   }
-  
 
   function handleSelectChange(event) {
     const selectedValue = event.target.value;
     setGenre(selectedValue);
-    console.log("sort :",sortingCriteria)
-    console.log("genre :" , selectedValue)
+    console.log("sort :", sortingCriteria);
+    console.log("genre :", selectedValue);
 
     fetch("https://moviegeek.azurewebsites.net/movieStatic/filterAndSort", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({genre: selectedValue, sort: sortingCriteria}),
+      body: JSON.stringify({ genre: selectedValue, sort: sortingCriteria }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -74,33 +72,31 @@ function FilmPage() {
 
   function handleSortByChange(event) {
     const selectedValue = event.target.value;
-   
-  
+
     setSortingCriteria(selectedValue);
-    console.log("sort :", sortingCriteria)
-    console.log("genre :", selectGenre)
+    console.log("sort :", sortingCriteria);
+    console.log("genre :", selectGenre);
 
     fetch("https://moviegeek.azurewebsites.net/movieStatic/filterAndSort", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ genre: selectGenre, sort: selectedValue }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (Array.isArray(data)) {
-        setMovies(data);
-      } else {
-        setMovies([]);
-      }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ genre: selectGenre, sort: selectedValue }),
     })
-    .catch((error) => {
-      console.error("Error during API request:", error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setMovies(data);
+        } else {
+          setMovies([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during API request:", error);
+      });
   }
 
-  
   // const movieLists = [];
 
   // for (let i = 0; i < Movie.length; i += moviesPerList) {
@@ -111,12 +107,12 @@ function FilmPage() {
   //       key={movie.id}
   //       imageUrl={movie.poster}
   //       onClick={() => MovieClicked(movie)}
-        
+
   //     />
   //   ));
 
   //   movieLists.push(
-    
+
   //       <div className="film-item">
   //         {movieCards}
 
@@ -129,30 +125,34 @@ function FilmPage() {
       key={movie.id}
       imageUrl={movie.poster}
       onClick={() => MovieClicked(movie)}
+      movieName={movie.title}
     />
   ));
 
   const movieLists = [];
 
-  for (let i = 0; i < movieItems.length; i += moviesPerList) {
-    const movieRow = movieItems.slice(i, i + moviesPerList);
+  for (let i = 0; i < movieItems.length; i += 18) {
+    const movieRow = movieItems;
     const filmItem = (
       <div className="film-item" key={i}>
         {movieRow}
       </div>
     );
     movieLists.push(filmItem);
-    
   }
 
   return (
     <div className="film-container">
-       <Navbar isLoggedIn={isLoggedIn} username={username}/>
+      <Navbar isLoggedIn={isLoggedIn} username={username} />
       <div className="film-item-title">
         <div className="film">Films</div>
         <div className="genres">
           Genres
-          <select className="option-menu" id = "genre" onChange={handleSelectChange}>
+          <select
+            className="option-menu"
+            id="genre"
+            onChange={handleSelectChange}
+          >
             <option value="">Default</option>
             <option value="Action">Action</option>
             <option value="Horror">Horror</option>
@@ -167,12 +167,16 @@ function FilmPage() {
 
         <div className="sort">
           Sort By
-          <select className="option-menu" id = "sort-by" onChange={handleSortByChange}>
+          <select
+            className="option-menu"
+            id="sort-by"
+            onChange={handleSortByChange}
+          >
             <option value="">Default</option>
             <optgroup label="Popularity">
               <option value="popular">Popularity</option>
             </optgroup>
-            
+
             <optgroup label="Release Date">
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
@@ -182,24 +186,13 @@ function FilmPage() {
               <option value="highest">Highest</option>
               <option value="lowest">Lowest</option>
             </optgroup>
-
           </select>
         </div>
       </div>
-      <div className="film-item-container">
-        
-        {movieLists}
-        
-
-        
-        
-        
+      <div className="film-item-container">{movieLists}</div>
+      <div className="film-footer">
+        <Footer />
       </div>
-      {/* <div className="film-footer">
-        <Footer/>
-
-      </div> */}
-      
     </div>
   );
 }

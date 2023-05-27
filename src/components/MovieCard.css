@@ -34,3 +34,9 @@
   .movie-border img:hover{
     transform: scale(1.1);
   }
+
+  .film-title{
+    margin-top: 15%;
+    color: white;
+    text-align: center;
+  }
