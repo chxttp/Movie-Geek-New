@@ -151,7 +151,7 @@ function ListsPage() {
                 onLike={() => handleLike(popularlist.id)}
                 onClick={() => listClicked(popularlist.id)}
               />
-              {!isLastItem && <hr className="separator" />}
+              <hr className="separator" />
             </React.Fragment>
           );
         })}

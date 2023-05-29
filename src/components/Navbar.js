@@ -2,32 +2,51 @@ import { NavLink } from "react-router-dom";
 import logo from "../Images/moviegeek.png";
 import profile from "../Images/pic-icon.png";
 import "./Navbar.css";
-import TextField from "@mui/material/TextField";
 import UserData from "../Data/UserData";
 import { useState, useContext, useEffect } from "react";
 
 function Navbar(props) {
   const isLoggedIn = props.isLoggedIn;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const { setUsername: setSharedUsername } = useContext(UserData);
 
   function handleLogout() {
     localStorage.removeItem("username"); // Clear the username from localStorage
     setSharedUsername(""); // Clear the shared username state
+    setDropdownOpen(false); // Close the dropdown menu
   }
+
+  function toggleDropdown() {
+    setDropdownOpen(!dropdownOpen);
+  }
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest(".navbar-dropdown")) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener("click", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [dropdownOpen]);
 
   return (
     <nav className="navbar">
       <ul>
         <li className="navbar-left">
-          <img src={logo} />
-        </li>
-
-        <li className="navbar-left">
           <NavLink to="/home" className="active hover">
-            MovieGeek
+            <img src={logo} alt="logo" />
           </NavLink>
         </li>
+
+        <li className="navbar-left">MovieGeek</li>
 
         <li className="navbar-right">
           <NavLink to="/film" className="active hover">
@@ -46,30 +65,35 @@ function Navbar(props) {
             Geeks
           </NavLink>
         </li>
-        {/* <li className="navbar-right">
-          <input placeholder="search" />
-        </li> */}
 
         {isLoggedIn ? (
           // authenticated
           <>
             <li className="navbar-right">
-              <NavLink to="/profile" className="active hover">
-                <img src={profile} alt="profile" />
-              </NavLink>
-              <NavLink to="/profile" className="active hover">
-                {props.username}
-              </NavLink>
-            </li>
-
-            <li className="navbar-right">
-              <NavLink
-                to="/login"
-                className="active hover"
-                onClick={handleLogout}
-              >
-                LogOut
-              </NavLink>
+              <div className="navbar-dropdown">
+                <div className="navbar-username" onClick={toggleDropdown}>
+                  <img src={profile} alt="profile" />
+                  {props.username}
+                </div>
+                {dropdownOpen && (
+                  <div className="dropdown-menu">
+                    <div>
+                      <NavLink to="/profile" className="active hover">
+                        Profile
+                      </NavLink>
+                    </div>
+                    <div>
+                      <NavLink
+                        to="/login"
+                        className="active hover"
+                        onClick={handleLogout}
+                      >
+                        Log Out
+                      </NavLink>
+                    </div>
+                  </div>
+                )}
+              </div>
             </li>
           </>
         ) : (
@@ -77,13 +101,13 @@ function Navbar(props) {
           <>
             <li className="navbar-right">
               <NavLink to="/login" className="active hover">
-                LogIn
+                Log In
               </NavLink>
             </li>
 
             <li className="navbar-right">
               <NavLink to="/signup" className="active hover">
-                SignUp
+                Sign Up
               </NavLink>
             </li>
           </>
