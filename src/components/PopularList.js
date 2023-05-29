@@ -9,6 +9,9 @@ function PopularList() {
   const [movies2, setMovies2] = useState([]);
   const [listID1 , setListID1] = useState([]);
   const [listID2 , setListID2] = useState([]);
+  const [moviestitle1, setMoviestitle1] = useState([]);
+  const [moviestitle2, setMoviestitle2] = useState([]);
+  
  
 
   const listClicked = (movieId) => {
@@ -34,6 +37,8 @@ function PopularList() {
           const firstMovie = data[0];
           setListID1(firstMovie.id);
           const moviePosters1 = firstMovie.listMoviePoster.split(", ");
+          const movieTitle1 = firstMovie.listName
+          setMoviestitle1(movieTitle1)
           setMovies1(moviePosters1);
         }
         if (data.length >= 2) {
@@ -41,6 +46,8 @@ function PopularList() {
           const secondMovie = data[1];
           setListID2(secondMovie.id);
           const moviePosters2 = secondMovie.listMoviePoster.split(", ");
+          const movieTitle2 = secondMovie.listName
+          setMoviestitle2(movieTitle2)
           setMovies2(moviePosters2);
         }
       })
@@ -62,6 +69,11 @@ function PopularList() {
               <div className="popular-card" key={index}>
                 <img src={poster} alt={`Movie Poster ${index + 1}`} 
                 onClick={() => listClicked(listID1)}/>
+                <div className="popular-title-container">
+                {index === 4 && <p className="card-title">{moviestitle1}</p>}
+
+                </div>
+
               </div>
             ))}
           </div>
@@ -71,9 +83,16 @@ function PopularList() {
               <div className="popular-card" key={index}>
                 <img src={poster} alt={`Movie Poster ${index + 1}`} 
                 onClick={() => listClicked(listID2)}/>
+                <div className="popular-title-container">
+                {index === 4 && <p className="card-title">{moviestitle2}</p>}
+
+                </div>
+                
+                
                 
               </div>
             ))}
+            
           </div>
         </div>
       </div>

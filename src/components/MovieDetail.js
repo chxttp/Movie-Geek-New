@@ -28,6 +28,8 @@ function MovieDetail() {
   const movieIdAsInt = parseInt(movieId);
   const [movie, setMovie] = useState(null);
 
+  
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch(`https://moviegeek.azurewebsites.net/movieStatic/getAll`)
@@ -37,8 +39,54 @@ function MovieDetail() {
         setMovie(movieData);
       })
       .catch((error) => console.log(error));
-      fetchActivityData();
+      
+      
   }, []);
+
+  useEffect(() => {
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/getAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ movieID: movieIdAsInt , username: username }),
+    })
+    .then((response) => response.json()) 
+    .then((data) => {
+      const ratingData = data.find((activity) => activity.actType === "rate");
+      const watchData = data.find((activity) => activity.actType === "watch");
+      const likeData = data.find((activity) => activity.actType === "like");
+      
+      
+
+      if (ratingData) {
+        setRating(ratingData.rating);
+        
+      }
+      if (watchData) {
+        
+        setWatchStatus(watchData.watchStatus);
+        if(watchData.watchStatus === "0"){
+          setEyeColor("white")
+        }
+        else if(watchData.watchStatus === "1"){
+          setEyeColor("yellow")
+        }
+
+      }
+      if (likeData) {
+       
+        setLikeStatus(likeData.likeStatus);
+        if(likeData.likeStatus === "0"){
+          setHeartColor("white")
+        }
+        else if(likeData.likeStatus === "1"){
+          setHeartColor("red")
+        }
+      }
+    })
+      .catch((error) => console.log(error));
+  },[movieIdAsInt, username])
 
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
@@ -60,133 +108,114 @@ function MovieDetail() {
       autoplay: 2,
     },
   };
-  const fetchActivityData = () => {
-    // Fetch activity data from the API
-    fetch("https://moviegeek.azurewebsites.net/movieActivity/getAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt }),
-    })
-      .then((data) => {
-       
-        setLikeStatus(data.likeStatus);
-        setWatchStatus(data.watchStatus);
-        setRating(parseInt(data.Rating));
-        alert(data.likeStatus)
-        if (data.likeStatus === "1") {
-          setLiked(true);
-          setHeartColor("red");
-        }
-        if (data.watchStatus === "1") {
-          setEyeColor("yellow");
-        }
-      })
-      .catch((error) => console.log(error));
-  };
+  
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
-    fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "rate", likeStatus: "0", watchStatus: "0", rating: rating }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-      })
-      .catch((error) => console.log(error));
+    updateRating(newRating)
     
   };
 
+  
+
+
   const handleLikeClick = () => {
-    if (liked) {
+    if (likeStatus == "1") {
       setLiked(false);
       setHeartColor("white");
       setLikeStatus("0");
+      updateLikeStatus("0")
       
     } else {
       setLiked(true);
       setHeartColor("red");
       setLikeStatus("1");
+      updateLikeStatus("1")
       
     }
-
-    if(likeStatus === "1"){
-      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "like", likeStatus: likeStatus, watchStatus: "0", rating: 0 }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-      })
-      .catch((error) => console.log(error));
-      
-      
-    }
-    else if(likeStatus === "0"){
-      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "like", likeStatus: likeStatus, watchStatus: "0", rating: 0 }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-      })
-      .catch((error) => console.log(error));
-
-    }
+    
   };
+  
 
   const handleWatchClick = () => {
     if (watchStatus === "0") {
       setEyeColor("yellow");
       setWatchStatus("1");
+      updateWatchStatus("1")
       
     } else {
       setEyeColor("white");
       setWatchStatus("0");
+      updateWatchStatus("0")
      
     }
-
-    if(watchStatus === "1"){
-      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "watch", likeStatus: "0", watchStatus: watchStatus, rating: 0 }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-      })
-      .catch((error) => console.log(error));
-      
-      
-    }
-    else if(watchStatus === "0"){
-      fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, movieId: movieIdAsInt, actType: "watch", likeStatus: "0", watchStatus: watchStatus, rating: 0 }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-      })
-      .catch((error) => console.log(error));
-
-    }
     
+    
+  };
+  const updateRating = (newRating) => {
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        movieID: movieIdAsInt,
+        actType: "rate",
+        rating: newRating,
+        likeStatus: "0",
+        watchStatus: "0",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response if necessary
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const updateLikeStatus = (newLikeStatus) => {
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        movieID: movieIdAsInt,
+        actType: "like",
+        rating: 0,
+        likeStatus: newLikeStatus,
+        watchStatus: "0",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response if necessary
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const updateWatchStatus = (newWatchStatus) => {
+    fetch("https://moviegeek.azurewebsites.net/movieActivity/insertAct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        movieID: movieIdAsInt,
+        actType: "watch",
+        rating: 0,
+        likeStatus: "0",
+        watchStatus: newWatchStatus,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response if necessary
+      })
+      .catch((error) => console.log(error));
   };
 
   const castClicked = () => {
@@ -254,7 +283,7 @@ function MovieDetail() {
                 <div className="like-button">
                   <p>Like this movie ?</p>
                   <br />
-                  <BsEye className="eyes" onClick={handleWatchClick}
+                  <BsEye className={`eyes ${watchStatus === "1" ? "watched" : ""}`} onClick={handleWatchClick}
               style={{ color: eyeColor }} />
                   <FaHeart
                     onClick={handleLikeClick}
@@ -287,7 +316,7 @@ function MovieDetail() {
             <div className="popular-reviews">
               <div className="popular">POPULAR REVIEWS</div>
               <div className="p-comment">
-                <Comment username={username}></Comment>
+                <Comment username={username} id={movieIdAsInt}></Comment>
               </div>
             </div>
           </div>

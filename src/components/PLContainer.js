@@ -33,7 +33,8 @@ function PLContainer({
     <div className="sub-list-container" onClick={handleListClick}>
       <div className="l-container">
         {listimg.map((poster, index) => (
-          <Rect_b key={index} src={poster} />
+          <Rect_b key={index} src={poster} firststackBehind={index == 1} secondstackBehind={index == 2} thirdstackBehind={index == 3} fourthstackBehind={index == 4}/>
+          
         ))}
       </div>
       <div className="r-container">

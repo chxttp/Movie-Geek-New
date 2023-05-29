@@ -60,6 +60,7 @@
   /*136px -30%*/
   width: 136px;
   margin-left: -30%;
+  position: relative;
 }
 
 .popular-card img {
@@ -148,3 +149,41 @@
     margin-left: auto;
 
   } */
+
+  .popular-title-container{
+    
+
+    display: inline-block;
+    margin-left: -50%;
+   
+    
+  }
+
+  @media (max-width: 768px) {
+    .popular-title-container {
+      
+      margin-left: 10px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .popular-title-container {
+      
+      margin-left: 10px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .popular-title-container {
+      
+      margin-left: 10px;
+    }
+  }
+  
+  
+  .card-title {
+    
+    margin-top: 30px;
+    color: white;
+    font-size: 16px;
+  }
+  

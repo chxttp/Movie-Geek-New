@@ -122,7 +122,6 @@ body {
     padding-bottom: 2px; */
   }
   .heart{
-    color: red;
     width: 100px;
     cursor: pointer;
   }
@@ -177,3 +176,5 @@ body {
     
     padding-right: 100px;
   }
+
+  
