@@ -77,7 +77,9 @@ function PLContainer({
       })
       .catch((error) => console.log(error));
    
-   
+      
+    window.location.reload();
+
   };
 
   const handleListClick = () => {
@@ -104,6 +106,7 @@ function PLContainer({
             <FaHeart
               onClick={handleLikeClick}
               className={`heart-pl ${liked ? "liked" : ""}`}
+              
             />
             {/* <p>{liked ? currentLikeAmount + 1 : currentLikeAmount}</p> */}
             <p>{currentLikeAmount}</p>
