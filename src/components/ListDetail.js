@@ -75,18 +75,31 @@ function ListDetail() {
         />
       ));
     
-      const movieLists = [];
+      // const movieLists = [];
     
-      for (let i = 0; i < movieItems.length; i += moviesPerList) {
-        const movieRow = movieItems.slice(i, i + moviesPerList);
+      // for (let i = 0; i < movieItems.length; i += moviesPerList) {
+      //   const movieRow = movieItems.slice(i, i + moviesPerList);
+      //   const filmItem = (
+      //     <div className="list-movie" key={i}>
+      //       {movieRow}
+      //     </div>
+      //   );
+      //   movieLists.push(filmItem);
+        
+      // }
+
+      const movieLists = [];
+
+      for (let i = 0; i < movieItems.length; i += 18){
+        const movieRow = movieItems;
         const filmItem = (
-          <div className="list-movie" key={i}>
+          <div className="film-item" key={i}>
             {movieRow}
           </div>
         );
         movieLists.push(filmItem);
-        
       }
+      
   return (
     <div className="list-container">
       <Navbar isLoggedIn={isLoggedIn} username={username}/>

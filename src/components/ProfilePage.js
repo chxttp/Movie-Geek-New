@@ -5,6 +5,7 @@ import EditProfile from "./EditProfile";
 import FollowersPopup from "./FollowersPopup";
 import FollowingPopup from "./FollowingPopup";
 import Footer from "./Footer";
+import profile from "../Images/pic-icon.png";
 
 import "./ProfilePage.css";
 
@@ -19,6 +20,7 @@ function ProfilePage() {
   const [recentReview, setRecentReview] = useState([]);
   const [recentReviewPoster, setRecentReviewPoster] = useState([]);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [profileData, setProfileData] = useState(null);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const usernameFromLink = searchParams.get('username');
@@ -152,7 +154,7 @@ function ProfilePage() {
           </div>
           {isOwnProfile ? (
             <button className="profile-edit-button" onClick={showEditProfile}>
-              Edit Profile
+              Edit Bio
             </button>
           ) : (
             // <button className="profile-edit-button" onClick={handleFollowClick}>{isFollowing ? "Following" : "Follow"}</button>

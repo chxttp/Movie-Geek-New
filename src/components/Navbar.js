@@ -72,7 +72,10 @@ function Navbar(props) {
             <li className="navbar-right">
               <div className="navbar-dropdown">
                 <div className="navbar-username" onClick={toggleDropdown}>
-                  <img src={profile} alt="profile" />
+                  <img
+                    src="https://img.freepik.com/free-icon/user_318-159711.jpg"
+                    alt="profile"
+                  />
                   {props.username}
                 </div>
                 {dropdownOpen && (

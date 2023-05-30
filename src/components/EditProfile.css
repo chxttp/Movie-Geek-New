@@ -15,7 +15,7 @@
   background-color: rgb(37, 38, 43);
   padding: 20px;
   width: 600px;
-  height: 400px;
+  height: 420px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -85,6 +85,10 @@
   height: 20%;
   font-size: 13px;
   margin-bottom: 2%;
+}
+
+.form-group label {
+  font-size: 25px;
 }
 
 label {

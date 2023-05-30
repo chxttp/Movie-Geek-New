@@ -100,7 +100,7 @@ function Signup() {
           <br />
           <label className="login-label">
             <div className="username-text">Username:</div>
-            <input className="login-input" type="text" value={username} onChange={handleUsernameChange} />
+            <input className="login-input" type="text" value={username} onChange={handleUsernameChange} style={{ width: '100%' }}/>
           </label>
           <br />
           <label className="login-label">

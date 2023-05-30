@@ -50,7 +50,7 @@
   display: flex;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #dddddd;
+  /* border-bottom: 1px solid #dddddd; */
   font-size: 16px;
 }
 
@@ -81,15 +81,14 @@
 }
 
 .remove-follower-button {
-    background-color: transparent;
-    border: 1px solid #ff0000;
-    color: #ff0000;
-    font-size: 14px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+  background-color: transparent;
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 .profile-border-s {
   width: 40px;
@@ -98,9 +97,9 @@
   background-color: #ffffff;
   margin-right: 10px;
 }
-.follower-username{
+.follower-username {
   cursor: pointer;
 }
-.follower-username:hover{
-  color: #FFD369;
+.follower-username:hover {
+  color: #ffd369;
 }
