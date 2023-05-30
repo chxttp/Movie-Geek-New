@@ -68,6 +68,7 @@ function Login() {
       .catch(error => {
         // Handle any errors that may occur during the API request
         console.error('Error during login:', error);
+        alert("Username or password is wrong")
       });
       
   }

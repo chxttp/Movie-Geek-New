@@ -78,7 +78,7 @@ function Navbar(props) {
                 {dropdownOpen && (
                   <div className="dropdown-menu">
                     <div>
-                      <NavLink to="/profile" className="active hover">
+                      <NavLink to={`/profile?username=${props.username}`}  className="active hover">
                         Profile
                       </NavLink>
                     </div>

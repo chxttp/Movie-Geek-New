@@ -80,3 +80,9 @@
   position: absolute;
   bottom: 0;
 }
+.geeks-username{
+  cursor: pointer;
+}
+.geeks-username:hover{
+  color: #FFD369;
+}

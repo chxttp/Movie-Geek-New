@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import './Comment.css';
 
-const Comment = ({username, id}) => {
+const Comment = ({username, id, ListId}) => {
   /// pass movie id and list id from the detail page #####
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
     // Fetch comments from the API when the component mounts
-    fetch("https://moviegeek.azurewebsites.net/movieDynamic/getMovieDynamic", {
+    if(id){
+      fetch("https://moviegeek.azurewebsites.net/movieActivity/getMovieReview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ movieID: id }),
+      body: JSON.stringify({ username: username, movieID: id }),
     })
       .then((response) => response.json())
       .then((data) => {
         // Update the comments state with the fetched comments
         if (Array.isArray(data) && data.length > 0) {
-          const commentArray = data[0].review.split(",");
-          setComments(commentArray);
+          setComments(data);
         } else {
           setComments([]);
         }
@@ -28,7 +28,36 @@ const Comment = ({username, id}) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [id]);
+    }
+    else if(ListId){
+      fetch("https://moviegeek.azurewebsites.net/listActivity/getComment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+  
+      body: JSON.stringify({ username: username, listID: ListId}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setComments(data);
+        } else {
+          setComments([]);
+        }
+        
+    
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    }
+    
+
+
+      
+  }, [id, ListId]);
 
   const handleChange = (event) => {
     setNewComment(event.target.value);
@@ -36,38 +65,81 @@ const Comment = ({username, id}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (newComment.trim() !== '') {
+
+    if (username === null) {
+      alert("Please login before commenting.");
+      return;
+    }
+
+  if (newComment.trim() !== '') {
+    const commentObject = {
+      username: username,
+      review: newComment,
+    };
+    // Create a comment object with the username and newComment
+    setComments([...comments, commentObject]);
+    setNewComment('');
+    
+    if(id){
       fetch("https://moviegeek.azurewebsites.net/movieActivity/insertReview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+  
       body: JSON.stringify({ username: username, movieID: id, actType: "review", review: newComment }),
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data)
+    
       })
       .catch((error) => {
         console.log(error);
       });
-      setComments([...comments, newComment]);
-      setNewComment('');
+
     }
+    else if(ListId){
+      fetch("https://moviegeek.azurewebsites.net/listActivity/insertComment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+  
+      body: JSON.stringify({ username: username, listID: ListId, actType: "comment", comment: newComment }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+    
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+    
+
+
+    }
+
+
+
   };
 
   return (
     <div className="comment-container">
       {/* <h2>Comments</h2> */}
       <div className="comment-list">
-        {comments.length > 0 ? (
-          comments.map((comment, index) => (
-            <div className="comment-item" key={index}>
+      {comments.length > 0 ? (
+          comments.map((comment) => (
+            <div className="comment-item" key={comment.id}>
               <div className="comment-header">
-                <div className="comment-avatar" />
-                <div className="comment-username">{"user"}</div>
+                <div className="comment-avatar" >
+                  <img src="https://img.freepik.com/free-icon/user_318-159711.jpg" alt="" />
+
+                </div>
+                <div className="comment-username">{comment.username}</div>
               </div>
-              <div className="comment-text">{comment}</div>
+              <div className="comment-text">{comment.review || comment.comment}</div>
             </div>
           ))
         ) : (

@@ -43,7 +43,14 @@ function ListsPage() {
   }, [username]);
 
   function createListClicked() {
-    navigate(`/CreateList`);
+    if(username === null){
+      alert("You should login before creating a list")
+      navigate("/Login")
+    }
+    else{
+      navigate(`/CreateList`);
+    }
+
   }
 
   const listClicked = (movieId) => {
@@ -133,15 +140,16 @@ function ListsPage() {
       </div>
       <div className="p-list-cotainer">
         {popularlists.map((popularlist, index) => {
-          const posters = poster[index]?.slice(0, 5);
+          const posters = poster[index]?.slice(0, 6);
           const isLastItem = index === popularlists.length - 1;
 
           return (
             <React.Fragment key={popularlist.id}>
               <PLContainer
+                id={popularlist.id}
                 title={popularlist.listName}
                 listimg={posters}
-                profileimg={popularlist?.profileimg}
+                profileimg={"https://img.freepik.com/free-icon/user_318-159711.jpg"}
                 profilename={popularlist.listOwner}
                 filminlist={popularlist.numOfMovies}
                 likeamount={popularlist.likeAmount}

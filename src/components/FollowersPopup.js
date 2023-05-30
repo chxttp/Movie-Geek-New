@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from "react";
 import ProfileBorder_s from "./ProfileBorder_s";
 import "./FollowersPopup.css";
-
-function FollowersPopup({ onClose , showRemoveButton}) {
+import { useNavigate, Redirect, Navigate } from 'react-router-dom';
+function FollowersPopup({ onClose , showRemoveButton, username}) {
   const [followers, setFollowers] = useState([
     // { id: 1, username: "user1" },
     // { id: 2, username: "user2" },
     // { id: 3, username: "user3" },
     // // Add more followers as needed
   ]);
-
-  const removeFollower = (followerId) => {
-    setFollowers((prevFollowers) =>
-      prevFollowers.filter((follower) => follower.id !== followerId)
-    );
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetch("",{
+  const navigate = useNavigate();
+  
+  fetch("https://moviegeek.azurewebsites.net/userDynamic/getMyDetail", {
+    
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ sort: username }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      setFollowers(data);
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFollowers(data.follower.split(", "));
+        
+      })
+      .catch((error) => console.log(error));
 
-    .catch((error) => console.log(error));
-  }, [])
+      const handleProfileClick = (username) => {
+   
+        navigate(`/profile?username=${username}`)
+        onClose();
+      };
+
+  
 
   return (
     <div className="followers-popup-overlay">
@@ -44,17 +46,10 @@ function FollowersPopup({ onClose , showRemoveButton}) {
         <div className="followers-list">
           {followers.map((follower) => (
             <div className="follower-item" key={follower.id}>
-              <ProfileBorder_s src={follower.profileimg}/>
+              <ProfileBorder_s src={"https://img.freepik.com/free-icon/user_318-159711.jpg"}/>
               <div className="follower-details">
-                <span className="follower-username">{follower.username}</span>
-                {showRemoveButton && (
-                  <button
-                    className="remove-follower-button"
-                    onClick={() => removeFollower(follower.id)}
-                  >
-                    Remove
-                  </button>
-                )}
+                <span className="follower-username" onClick={() => handleProfileClick(follower)}>{follower}</span>
+                
               </div>
             </div>
           ))}

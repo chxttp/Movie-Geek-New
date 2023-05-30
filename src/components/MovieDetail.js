@@ -18,11 +18,13 @@ function MovieDetail() {
   const [rating, setRating] = useState(0);
   const [liked, setLiked] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [username, setUsername] = useState(true);
+  const [username, setUsername] = useState(""); // true
   const [heartColor, setHeartColor] = useState("white");
   const [likeStatus, setLikeStatus] = useState("0");
   const [eyeColor, setEyeColor] = useState("white");
   const [watchStatus, setWatchStatus] = useState("0");
+  const [movieRating, setMovieRating] = useState(0.0);
+
 
   const { movieId } = useParams();
   const movieIdAsInt = parseInt(movieId);
@@ -53,10 +55,20 @@ function MovieDetail() {
     })
     .then((response) => response.json()) 
     .then((data) => {
+
+      // console.log("M: ", movieIdAsInt, "username: ", username);
+
+      // console.log("act: ", data);
+      
       const ratingData = data.find((activity) => activity.actType === "rate");
       const watchData = data.find((activity) => activity.actType === "watch");
       const likeData = data.find((activity) => activity.actType === "like");
       
+      // const movieRating = data[0].movieRating
+      // setMovieRating(movieRating)
+      
+      // console.log("R: ", data[0].movieRating, "rate: ", ratingData, ", watch: ", watchData, ", like: ", likeData);
+
       
 
       if (ratingData) {
@@ -84,6 +96,7 @@ function MovieDetail() {
           setHeartColor("red")
         }
       }
+      
     })
       .catch((error) => console.log(error));
   },[movieIdAsInt, username])
@@ -111,6 +124,10 @@ function MovieDetail() {
   
 
   const handleRatingChange = (newRating) => {
+    if (!isLoggedIn) {
+      alert("Please login before rating a movie.");
+      return;
+    }
     setRating(newRating);
     updateRating(newRating)
     
@@ -120,6 +137,10 @@ function MovieDetail() {
 
 
   const handleLikeClick = () => {
+    if (!isLoggedIn) {
+      alert("Please login before rating a movie.");
+      return;
+    }
     if (likeStatus == "1") {
       setLiked(false);
       setHeartColor("white");
@@ -138,6 +159,10 @@ function MovieDetail() {
   
 
   const handleWatchClick = () => {
+    if (!isLoggedIn) {
+      alert("Please login before rating a movie.");
+      return;
+    }
     if (watchStatus === "0") {
       setEyeColor("yellow");
       setWatchStatus("1");
@@ -259,6 +284,7 @@ function MovieDetail() {
   if (!movie) {
     return <div>Loading...</div>; // Add a loading state or spinner while fetching movie data
   }
+  
 
   return (
     <div className="movie-detail">
@@ -267,7 +293,7 @@ function MovieDetail() {
         <div className="detail-container">
           <div className="right-column">
             <MovieCard imageUrl={movie?.poster} />
-            <div class="show-rating">⭐ &nbsp;RATING 2.0 / 5.0</div>
+            <div class="show-rating">⭐ &nbsp;RATING {movie.rating}/ 5.0</div>
             <div className="rating">
               <p>Rate this movie: &nbsp;</p>
               <div className="stars">
@@ -314,7 +340,7 @@ function MovieDetail() {
             </div>
 
             <div className="popular-reviews">
-              <div className="popular">POPULAR REVIEWS</div>
+              <div className="popular">REVIEWS</div>
               <div className="p-comment">
                 <Comment username={username} id={movieIdAsInt}></Comment>
               </div>

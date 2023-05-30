@@ -65,7 +65,7 @@ function PopularList() {
       <div className="popular-list">
         <div className="flex-container">
           <div className="popular-card-container">
-            {movies1.map((poster, index) => (
+            {movies1.slice(0,5).map((poster, index) => (
               <div className="popular-card" key={index}>
                 <img src={poster} alt={`Movie Poster ${index + 1}`} 
                 onClick={() => listClicked(listID1)}/>
@@ -79,7 +79,7 @@ function PopularList() {
           </div>
 
           <div className="popular-card-container2">
-            {movies2.map((poster, index) => (
+            {movies2.slice(0,5).map((poster, index) => (
               <div className="popular-card" key={index}>
                 <img src={poster} alt={`Movie Poster ${index + 1}`} 
                 onClick={() => listClicked(listID2)}/>

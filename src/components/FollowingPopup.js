@@ -1,50 +1,37 @@
 import React, { useEffect, useState } from "react";
 import ProfileBorder_s from "./ProfileBorder_s";
 import "./FollowingPopup.css";
+import { useNavigate, Redirect, Navigate } from 'react-router-dom';
 
-function FollowingPopup({ onClose, isOwnProfile }) {
+function FollowingPopup({ onClose, isOwnProfile, username }) {
   const [following, setFollowing] = useState([
-    { id: 1,
-      username: "user1", 
-      isFollowing: true, 
-      profileimg:"https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
-    },
-    { id: 2, 
-      username: "user2", 
-      isFollowing: true 
-    },
-    { id: 3, 
-      username: "user3", 
-      isFollowing: true 
-    },
-    // Add more following as needed
+
   ]);
+  const navigate = useNavigate();
 
-  const toggleFollowStatus = (userId) => {
-    setFollowing((prevFollowing) =>
-      prevFollowing.map((follow) =>
-        follow.id === userId
-          ? { ...follow, isFollowing: !follow.isFollowing }
-          : follow
-      )
-    );
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetch("",{
+  fetch("https://moviegeek.azurewebsites.net/userDynamic/getMyDetail", {
+    
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ sort: username }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      setFollowing(data);
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFollowing(data.following.split(", "));
+        
+      })
+      
+      .catch((error) => console.log(error));
 
-    .catch((error) => console.log(error));
-  }, [])
+      const handleProfileClick = (username) => {
+   
+        navigate(`/profile?username=${username}`)
+        onClose();
+      };
+
+  
 
   return (
     <div className="following-popup-overlay">
@@ -56,23 +43,18 @@ function FollowingPopup({ onClose, isOwnProfile }) {
           </button>
         </div>
         <div className="following-list">
-          {following.map((follow) => (
-            <div className="following-item" key={follow.id}>
-              <ProfileBorder_s src={follow.profileimg}/>
-              <span>{follow.username}</span>
-
-              {isOwnProfile && (
-                <button
-                  className={`follow-button ${
-                    follow.isFollowing ? "following" : ""
-                  }`}
-                  onClick={() => toggleFollowStatus(follow.id)}
-                >
-                  {follow.isFollowing ? "Following" : "Follow"}
-                </button>
-              )}
-            </div>
-          ))}
+          {following !==  null? (
+            following.map((follow) => (
+              <div className="following-item" key={follow.id}>
+                <ProfileBorder_s src={"https://img.freepik.com/free-icon/user_318-159711.jpg"} />
+                <span onClick={() => handleProfileClick(follow)} className="name-click">
+                  {follow}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
       </div>
     </div>

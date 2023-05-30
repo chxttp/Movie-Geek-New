@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Rect_b.css";
 
-const RectangleBorder = ({ src, alt, firststackBehind, secondstackBehind, thirdstackBehind, fourthstackBehind }) => {
+const RectangleBorder = ({ src, alt, firststackBehind, secondstackBehind, thirdstackBehind, fourthstackBehind, fifthstackBehind, sixthstackBehind }) => {
   let className = "rectangle-image";
 
   if (firststackBehind) {
@@ -19,6 +19,12 @@ const RectangleBorder = ({ src, alt, firststackBehind, secondstackBehind, thirds
 
   if (fourthstackBehind) {
     className += " behind-image4";
+  }
+  if(fifthstackBehind){
+    className += " behind-image5";
+  }
+  if(sixthstackBehind){
+    className += " behind-image6";
   }
   return (
     <div className="rectangle-border-s">

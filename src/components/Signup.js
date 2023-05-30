@@ -10,6 +10,7 @@ function Signup() {
   // const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
 
   function handleUsernameChange(event) {
@@ -20,10 +21,24 @@ function Signup() {
     setPassword(event.target.value);
   }
 
+  function handleConfirmChange(event){
+    setConfirmPassword(event.target.value)
+  }
+
   function handleSubmit(event) {
     let email = document.getElementById("email").value
     event.preventDefault();
     
+    if (!username || !password || !confirmPassword) {
+      alert('Please fill in all fields.'); // Display an alert if any field is empty
+      return;
+    }
+  
+    if (password !== confirmPassword) {
+      alert('Password and confirm password do not match.'); // Display an alert if password and confirm password don't match
+      return;
+    }
+  
     
 
     const newUser = {
@@ -94,8 +109,8 @@ function Signup() {
           </label>
           <br />
           <label className="login-label">
-            <div className="password-text">Confirm Password:</div>
-            <input className="login-input" type="password" value={password} onChange={handlePasswordChange} />
+            <div className="confirm-password-text">Confirm Password:</div>
+            <input className="login-input" type="password" value={confirmPassword} onChange={handleConfirmChange} />
           </label>
           <br />
           <button className="login-button" type="submit">Create an account</button>

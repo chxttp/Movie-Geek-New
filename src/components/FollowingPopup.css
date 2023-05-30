@@ -81,3 +81,10 @@
   background-color: #777777;
   color: white;
 }
+.name-click{
+  cursor: pointer;
+
+}
+.name-click:hover{
+  color: #FFD369;
+}

@@ -98,3 +98,9 @@
   background-color: #ffffff;
   margin-right: 10px;
 }
+.follower-username{
+  cursor: pointer;
+}
+.follower-username:hover{
+  color: #FFD369;
+}

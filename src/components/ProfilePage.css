@@ -65,8 +65,10 @@
   
   .photo-grid img {
     border: 1px solid white;
-    width: 65%;
-    height: 90%;
+    width: 150px;
+    height: 200px;
+   
+    
     border-radius: 5px;
   }
   .photo-grid img:hover{
@@ -176,7 +178,9 @@
   }
 
   .recent-review-item .image-container {
-    width: 100px; /* Adjust the width to your desired size */
+    width: 150px; /* Adjust the width to your desired size */
+    height: 230px;
+    object-fit: cover;
   }
   .recent-review-container .recent-review-info {
     

@@ -19,7 +19,7 @@ function ListDetail() {
   const [username, setUsername] = useState(true);
 
   const { listId } = useParams();
-  // const intId = parseInt(listId)
+  const intId = parseInt(listId)
 
   useEffect(() => {
     setUsername(localStorage.getItem('username'));
@@ -95,7 +95,7 @@ function ListDetail() {
       </div>
       <div className="list-profile-container">
         <div className="list-profile-header">
-          <ProfileBorder src="https://variety.com/wp-content/uploads/2021/09/Drake-publicity3-2021.jpg?w=1000"/>
+          <ProfileBorder src="https://img.freepik.com/free-icon/user_318-159711.jpg"/>
           <div className="list-profile-name">
             <h1>List by {listDetail.listOwner}</h1>
           </div>
@@ -118,7 +118,7 @@ function ListDetail() {
         COMMENT
       </div>
       <div className="comment">
-      <Comment username={username}/>
+      <Comment username={username} ListId={intId}/>
 
 
       </div>

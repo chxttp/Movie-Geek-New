@@ -4,21 +4,11 @@ import ProfileBorder from "./ProfileBorder";
 import RectangleBorder from "./RectangleBorder";
 import Footer from "./Footer";
 import "./Geeks.css";
+import { useNavigate, Redirect, Navigate } from 'react-router-dom';
 
 function Geeks() {
-  const profileData = [
-    {
-      profileName: "Jonny Doe",
-      filmWacted: "500",
-      filmReviewed: "200",
-      profileimg:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
-      listimg:
-        "https://m.media-amazon.com/images/I/717la8Z17sL._AC_UF894,1000_QL80_.jpg",
-    },
-    // Add more profile objects as needed
-  ];
-
+  
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(true);
   const [userdata, setUserdata] = useState([]);
@@ -54,6 +44,11 @@ function Geeks() {
       .catch((error) => console.log(error));
   }, []);
 
+  const handleProfileClick = (username) => {
+   
+    navigate(`/profile?username=${username}`)
+  };
+
   return (
     <div className="Geek">
       <Navbar isLoggedIn={isLoggedIn} username={username} />
@@ -73,16 +68,20 @@ function Geeks() {
         <div className="popular-profile-container">
           {userdata.map((profile, index) => (
             <div className="popular-profile" key={index}>
-              <ProfileBorder src={profile.proImage}></ProfileBorder>
+              {/* <ProfileBorder src={profile.proImage}></ProfileBorder> */}
+              <ProfileBorder src="https://img.freepik.com/free-icon/user_318-159711.jpg" />
+
+              
               <div>
-                <h2>{profile.username}</h2>
+                <h2 onClick={() => handleProfileClick(profile.username)} className="geeks-username">{profile.username}</h2>
                 <h3>
-                  {profile.numofFilm} films {profile.numofReview} reviews
+                  {profile.movie_amount} films {profile.review_amount} reviews
                 </h3>
               </div>
               <div className="recently-review-container">
-                <RectangleBorder src={profile.actImage}></RectangleBorder>
-                {/* Add more RectangleBorder components if needed */}
+              {profile.recentPosters.slice(0, 3).map((poster, posterIndex) => (
+                <RectangleBorder src={poster} key={posterIndex}></RectangleBorder>
+              ))}
               </div>
             </div>
           ))}
