@@ -190,9 +190,9 @@ function FilmPage() {
         </div>
       </div>
       <div className="film-item-container">{movieLists}</div>
-      <div className="film-footer">
+      {/* <div className="film-footer">
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 }
