@@ -46,7 +46,7 @@ function PLContainer({
       })
       .catch((error) => console.log(error));
     
-  }, [id, username]);
+  }, [id, username,likeStatus]);
 
   const handleLikeClick = (event) => {
     event.stopPropagation();

@@ -78,7 +78,7 @@ function ProfilePage() {
         setFollowButtonText(buttonText);
       })
       .catch((error) => console.log(error));
-  }, [usernameFromLink, usernameFromLocalStorage]);
+  }, [usernameFromLink, usernameFromLocalStorage, userData]);
  
 
   
@@ -165,7 +165,7 @@ function ProfilePage() {
         <div className="profile-body">
           <div className="profile-info">
             <div className="films">
-              <p>{userData.numofFilm}</p>
+              <p>{userData.movie_amount}</p>
               <h3>FILMS</h3>
             </div>
 
@@ -191,44 +191,32 @@ function ProfilePage() {
           <div className="recent-activities">
             <h2>RECENT ACTIVITY</h2>
             <div className="photo-grid">
-              {recentActivity.map((photo, index) => (
-                <img src={photo} alt={`Photo ${index + 1}`} key={index} />
-              ))}
+            {recentActivity&& recentActivity.length >0 ? (
+            recentActivity.map((photo, index) => (
+              <img src={photo} alt={`Photo ${index + 1}`} key={index} />
+            ))
+          ) : (
+            <p>No recent activity yet.</p>
+          )}
             </div>
           </div>
           <div className="recent-review-container">
             <h3 className="recent-review-text">RECENT REVIEWS</h3>
-            <div className="recent-review-item">
-              {/* First recent review */}
+            {recentReview&& recentReview.length > 0 ? (
+          recentReview.map((review, index) => (
+            <div className="recent-review-item" key={index}>
               <div className="image-container">
-                 {/* <img src="https://i.mydramalist.com/4v6zJ_4f.jpg" alt="" /> */}
-                 <img src={recentReviewPoster[0]} alt="" />
-               </div>
-
-               <div className="recent-review-info">
-                
-                 <p>
-                 {recentReview[0]}
-                 </p>
-                 
-               </div>
+                <img src={recentReviewPoster[index]} alt="" />
+              </div>
+              <div className="recent-review-info">
+                <p>{review}</p>
+              </div>
             </div>
-            <div className="recent-review-item">
-              {/* First recent review */}
-              <div className="image-container">
-                 {/* <img src="https://i.mydramalist.com/4v6zJ_4f.jpg" alt="" /> */}
-                 <img src={recentReviewPoster[1]} alt="" />
-               </div>
-
-               <div className="recent-review-info">
-                 {/* <h4>THE GLORY</h4> */}
-                 
-                 <p>
-                 {recentReview[1]}
-                 </p>
-                 
-               </div>
-            </div>
+          ))
+        ) : (
+          <p>No recent reviews yet.</p>
+        )}
+            
           </div>
         </div>
       </div>

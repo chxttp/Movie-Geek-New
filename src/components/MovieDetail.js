@@ -131,6 +131,7 @@ function MovieDetail() {
     setRating(newRating);
     updateRating(newRating)
     
+    
   };
 
   
@@ -316,7 +317,7 @@ function MovieDetail() {
                     className={`heart ${liked ? "liked" : ""}`}
                     id="heart-icon"
                   />
-                  <MdOutlinePlaylistAddCircle className="watchlist" />
+                  
                 </div>
               </div>
             </div>
